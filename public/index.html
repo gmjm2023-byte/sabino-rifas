@@ -213,15 +213,15 @@
     letter-spacing:2px; color:rgba(255,255,255,.2); margin:0;
   }
 
-  /* ── Rifa fold: preenche o espaço restante da hero ── */
+  /* ── Rifa fold: distribui espaço restante da hero ── */
   .rifa-fold{
     flex:1; min-height:0;
     display:flex; flex-direction:column;
     width:100%; max-width:none;
-    padding:10px 16px 0; margin:0; overflow:hidden;
-    justify-content:flex-start;
+    padding:8px 16px 8px; margin:0; overflow:hidden;
+    justify-content:center; /* card centralizado verticalmente */
   }
-  /* rifa-active tamanho natural — sem espaços vazios */
+  /* rifa-active tamanho natural, sem espaços vazios */
   .rifa-active{
     flex:none !important;
     display:flex; flex-direction:column;
@@ -551,16 +551,11 @@
   /* ── Hero image flush ── */
   .rc-hero{
     position:relative;
-    width:100%; aspect-ratio:16/9;
-    background:#0a0a0a; overflow:hidden;
+    width:100%;
+    background:#0a0a0a;
   }
   .rc-hero-img{
     width:100%;height:100%;object-fit:cover;display:block;
-  }
-  .rc-hero::after{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,transparent 25%,transparent 75%,rgba(0,0,0,.22) 100%);
-    pointer-events:none;
   }
   .rc-hero-top{
     position:absolute;top:0;left:0;right:0;z-index:3;
@@ -762,13 +757,11 @@
   .ganh-overlay{
     position:absolute;inset:0;
     display:flex;flex-direction:column;
-    justify-content:space-between;
+    justify-content:flex-start;
     padding:10px 10px 12px;
     background:linear-gradient(180deg,
-      rgba(0,0,0,.62) 0%,
-      transparent 38%,
-      transparent 58%,
-      rgba(0,0,0,.72) 100%);
+      rgba(0,0,0,.58) 0%,
+      transparent 42%);
   }
   .ganh-badge{
     display:inline-flex;align-items:center;gap:5px;
@@ -780,15 +773,6 @@
     align-self:flex-start;
   }
   .ganh-badge i{ font-size:8px; }
-  .ganh-label{
-    font-family:'Orbitron',sans-serif;
-    font-size:10px;font-weight:700;
-    color:#fff;letter-spacing:.5px;
-    text-transform:uppercase;
-    text-shadow:0 1px 6px rgba(0,0,0,.9),0 0 12px rgba(0,0,0,.7);
-    line-height:1.2;
-    align-self:flex-start;
-  }
 
   /* ============ BANNER BUTTONS (IG / WPP) ============ */
   .banner-row{
@@ -1075,16 +1059,8 @@
   .faq-section{margin-bottom:clamp(22px,5vw,36px)}
   .links-section{padding-top:clamp(28px,5vw,48px)}
 
-  /* ============ GANHADORES SECTION — carousel spacing ============ */
+  /* ============ GANHADORES SECTION ============ */
   .ganhadores-head{margin-bottom:12px}
-  .ganhadores-head .head-sub{
-    font-size:10.5px;
-    color:rgba(255,255,255,.38);
-    letter-spacing:.5px;
-    font-family:'Poppins',sans-serif;
-    font-style:italic;
-    text-transform:none;
-  }
 
   /* ============ RIFA CARD — ANIMATED BORDER ============ */
   @property --rifa-angle {
@@ -1319,7 +1295,6 @@
   <div class="ganhadores-section">
     <div class="ganhadores-head gsap-fade-up">
       <h2 class="head-title"><i class="fa-solid fa-trophy"></i> GANHADORES</h2>
-      <span class="head-sub">+500 entregas reais</span>
     </div>
     <div class="carousel-viewport">
       <div class="carousel-track" id="videoTrack">
@@ -1328,7 +1303,6 @@
           <div class="ganh-img"><img src="assets/ganh-HONDA-BIZ-125.jpg" alt="Ganhador Honda Biz 125" loading="lazy"></div>
           <div class="ganh-overlay">
             <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
-            <div class="ganh-label">Honda Biz 125</div>
           </div>
         </div>
 
@@ -1336,7 +1310,6 @@
           <div class="ganh-img"><img src="assets/ganh-HONDA-FOURTRAX-420.jpg" alt="Ganhador Honda Fourtrax 420" loading="lazy"></div>
           <div class="ganh-overlay">
             <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
-            <div class="ganh-label">Fourtrax 420</div>
           </div>
         </div>
 
@@ -1344,7 +1317,6 @@
           <div class="ganh-img"><img src="assets/ganh-L200-TRITON.webp" alt="Ganhador L200 Triton" loading="lazy"></div>
           <div class="ganh-overlay">
             <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
-            <div class="ganh-label">L200 Triton</div>
           </div>
         </div>
 
@@ -1352,7 +1324,6 @@
           <div class="ganh-img"><img src="assets/ganh-RAM-REBEL-1500.webp" alt="Ganhador RAM Rebel 1500" loading="lazy"></div>
           <div class="ganh-overlay">
             <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
-            <div class="ganh-label">RAM Rebel 1500</div>
           </div>
         </div>
 
@@ -1360,7 +1331,6 @@
           <div class="ganh-img"><img src="assets/ganh-FORD-RANGER-V6.webp" alt="Ganhador Ford Ranger V6" loading="lazy"></div>
           <div class="ganh-overlay">
             <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
-            <div class="ganh-label">Ranger V6</div>
           </div>
         </div>
 
@@ -1368,7 +1338,6 @@
           <div class="ganh-img"><img src="assets/ganh-YAMAHA-FACTOR-01.webp" alt="Ganhador Yamaha Factor" loading="lazy"></div>
           <div class="ganh-overlay">
             <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
-            <div class="ganh-label">Yamaha Factor</div>
           </div>
         </div>
 
@@ -1376,7 +1345,6 @@
           <div class="ganh-img"><img src="assets/ganh-YAMAHA-FACTOR-02.webp" alt="Ganhador Yamaha Factor" loading="lazy"></div>
           <div class="ganh-overlay">
             <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
-            <div class="ganh-label">Yamaha Factor</div>
           </div>
         </div>
 
