@@ -60,9 +60,8 @@
 <link rel="dns-prefetch" href="https://unpkg.com" />
 <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
 
-<!-- Preload hero video (device-specific) -->
-<link rel="preload" as="video" href="assets/hero-desktop.mp4" media="(max-width:767px)" />
-<link rel="preload" as="video" href="assets/hero-mobile.mp4" media="(min-width:768px)" />
+<!-- Preload rifa cover (above fold) -->
+<link rel="preload" as="image" href="assets/premio-sw4-nivus.jpg" />
 
 <!-- Icons (non-blocking) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'" />
@@ -100,14 +99,41 @@
   ::-webkit-scrollbar-thumb:hover{background:linear-gradient(0deg,var(--gold-deep),var(--gold-2))}
 
 
-  /* ============ HERO ============ */
+  /* ============ HERO (sem vídeo) ============ */
   .hero-section{
     position:relative;
-    min-height:892px;
     background:
       radial-gradient(ellipse at 50% 30%, #1a1500 0%, #0d0d0d 55%, #050505 100%);
     display:flex;flex-direction:column;justify-content:center;align-items:center;
+    padding:env(safe-area-inset-top,0px) 20px 40px;
+    padding-top:max(52px, env(safe-area-inset-top,52px));
     overflow:hidden;
+  }
+
+  /* ── Info card: em fluxo normal (sem vídeo) ── */
+  .info-card{
+    position:relative !important;
+    top:auto !important; left:auto !important; bottom:auto !important;
+    transform:none !important;
+    margin:0 auto;
+    z-index:10;
+  }
+  @keyframes infoFloat{
+    0%,100%{ transform:translateY(0px); }
+    50%    { transform:translateY(-7px); }
+  }
+  .info-card.is-floating{
+    animation:infoBorderSpin 12s linear infinite, infoFloat 4.5s ease-in-out infinite;
+  }
+
+  /* ── Rifa acima do ticker ── */
+  .rifa-fold{
+    width:100%; max-width:920px;
+    margin:0 auto;
+    padding:0 20px;
+  }
+  @media(max-width:767px){
+    .rifa-fold{ padding:0 16px; }
   }
 
   /* CSS smoke + light beams (substituem os vídeos) */
@@ -870,19 +896,7 @@
 
   /* ============ MOBILE ============ */
   @media(max-width:767px){
-    /* Hero cresce até preencher o viewport menos a altura fixa do ticker */
-    .hero-section{height:calc(100svh - 52px);min-height:calc(100vw * 1.2);overflow:hidden}
-    /* Ticker fixo em 52px no inferior da dobra — hero + ticker = 100svh */
-    .ticker-section{
-      height:52px;
-      padding:0;
-      display:flex;align-items:center;
-      overflow:hidden;
-    }
-    /* Card na área de terra/chão abaixo dos carros */
     .info-card{
-      top:auto;
-      bottom:14px;
       min-width:92vw;
       padding:14px 20px;
     }
@@ -1079,77 +1093,18 @@
     background: var(--gold); color: #0a0a0a;
   }
 
-  /* ============ HERO VIDEOS — CROSSFADE ============ */
-  .hero-vid-wrap{
-    position:absolute;inset:0;z-index:0;
-    display:none;
-  }
-  .hero-vid-wrap video{
-    position:absolute;
-    top:0;left:50%;
-    transform:translateX(-50%);
-    width:100%;height:auto;
-    min-height:100%;
-    object-fit:contain;
-    object-position:top center;
-    transition:opacity 450ms ease;
-    will-change:opacity;
-  }
-  .hero-vid-a{ opacity:1; }
-  .hero-vid-b{ opacity:0; }
-
-  @media(max-width:767px){
-    .hero-vid-wrap.mobile{ display:block; }
-    /* 9:16 sem zoom: largura 100%, altura proporcional, fixo no topo, centrado */
-    .hero-vid-wrap.mobile video{
-      width:100%;
-      height:auto;
-      min-height:unset;
-      top:0;
-      left:50%;
-      transform:translateX(-50%);
-    }
-    .hero-section{ background:#1a0e00; }
-    .hero-section .fx-smoke{
-      opacity:.80;
-      background:
-        linear-gradient(180deg, transparent 40%, rgba(0,0,0,.82) 100%),
-        radial-gradient(circle at 20% 40%, rgba(201,168,76,.12), transparent 50%);
-    }
-  }
-  @media(min-width:768px){
-    .hero-vid-wrap.desktop{ display:block; }
-    /* 16:9 completo: largura 100%, altura automática = vídeo inteiro visível, topo alinhado */
-    .hero-vid-wrap.desktop video{
-      width:100%;
-      height:auto;
-      min-height:unset;
-      top:0;
-      left:0;
-      transform:none;
-    }
-    /* hero estica para acomodar o vídeo inteiro (proporção 16:9 = 56.25vw de altura) */
-    .hero-section{ background:#1a0e00; min-height:56.26vw; }
-    .hero-section .fx-smoke{
-      opacity:.65;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.12) 0%, transparent 40%, rgba(0,0,0,.55) 100%),
-        radial-gradient(circle at 20% 40%, rgba(201,168,76,.12), transparent 50%);
-    }
-  }
 
 
   /* ============ TABLET (768–1024) ============ */
   @media(min-width:768px) and (max-width:1024px){
-    .info-card{ min-width:clamp(360px,72vw,520px); padding:22px 36px 18px; top:auto; bottom:clamp(32px,5vh,56px); }
+    .info-card{ min-width:clamp(360px,72vw,520px); padding:22px 36px 18px; }
     .links-section{ max-width:700px }
     .card-title{ font-size:clamp(20px,3.5vw,26px) }
   }
 
   /* ============ DESKTOP (≥1025px) ============ */
   @media(min-width:1025px){
-    .info-card{ top:auto; bottom:clamp(48px,6vh,80px); min-width:520px; }
-    .scroll-indicator{ display:block; top:80px; }
+    .info-card{ min-width:520px; }
   }
 
   /* ============ WIDE DESKTOP (≥1440px) ============ */
@@ -1176,46 +1131,8 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero-section">
-  <!-- Crossfade: Mobile (vertical 9:16 — hero-desktop.mp4 = 1080×1920) -->
-  <div class="hero-vid-wrap mobile" aria-hidden="true">
-    <video class="hero-vid-a" autoplay muted playsinline webkit-playsinline preload="auto">
-      <source src="assets/hero-desktop.mp4" type="video/mp4">
-    </video>
-    <video class="hero-vid-b" muted playsinline webkit-playsinline preload="none">
-      <source src="assets/hero-desktop.mp4" type="video/mp4">
-    </video>
-  </div>
-  <!-- Crossfade: Desktop (horizontal 16:9 — hero-mobile.mp4 = 1280×720) -->
-  <div class="hero-vid-wrap desktop" aria-hidden="true">
-    <video class="hero-vid-a" autoplay muted playsinline webkit-playsinline preload="auto">
-      <source src="assets/hero-mobile.mp4" type="video/mp4">
-    </video>
-    <video class="hero-vid-b" muted playsinline webkit-playsinline preload="none">
-      <source src="assets/hero-mobile.mp4" type="video/mp4">
-    </video>
-  </div>
   <div class="fx-layer fx-smoke"></div>
   <div class="fx-layer fx-grain"></div>
-
-  <nav class="nav-labels">
-    <h2>SONHOS</h2>
-    <h2>RIFAS</h2>
-    <h2>REAIS</h2>
-  </nav>
-
-  <div class="scroll-indicator">
-    <div class="scroll-circle">
-      <svg class="scroll-circle-svg" viewBox="0 0 100 100">
-        <defs>
-          <path id="cp" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0"/>
-        </defs>
-        <text font-size="9.5" fill="rgba(201,168,76,.85)" font-family="Orbitron,sans-serif" letter-spacing="3.2">
-          <textPath href="#cp">ARRASTE PARA BAIXO · ARRASTE PARA BAIXO ·</textPath>
-        </text>
-      </svg>
-      <span class="scroll-arrow">&#8595;</span>
-    </div>
-  </div>
 
   <div class="info-card">
     <div class="badge-verified">
@@ -1225,21 +1142,11 @@
     <h2 class="name">Sabino Cabral</h2>
     <h2 class="title">Vida simples, sonhos grandes 🌾</h2>
     <p class="handle">@SABINOCABRALBR</p>
-    <p class="scroll-down-hint">Arraste para baixo <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></p>
   </div>
 </section>
 
-<!-- ============ TICKER ============ -->
-<div class="ticker-section">
-  <div class="ticker-track" id="ticker">
-    <!-- preenchido por JS para garantir loop perfeito -->
-  </div>
-</div>
-
-<!-- ============ LINKS ============ -->
-<section class="links-section">
-
-  <!-- RIFA ATIVA — Redesign Premium -->
+<!-- ============ RIFA ATIVA (acima do ticker) ============ -->
+<div class="rifa-fold">
   <div class="rifa-active gsap-card">
 
     <!-- Hero image com overlays editoriais -->
@@ -1308,6 +1215,17 @@
     </a>
 
   </div>
+</div><!-- /rifa-fold -->
+
+<!-- ============ TICKER ============ -->
+<div class="ticker-section">
+  <div class="ticker-track" id="ticker">
+    <!-- preenchido por JS para garantir loop perfeito -->
+  </div>
+</div>
+
+<!-- ============ LINKS ============ -->
+<section class="links-section">
 
   <!-- Botões IG + WPP (lado a lado) -->
   <div class="banner-row">
@@ -1727,88 +1645,11 @@
     });
   }
 
-  /* ── 5. Crossfade A/B para loop sem tela preta ── */
-  function initVideoCrossfade() {
-    var CROSSFADE_MS  = 450;   // duração do fade em ms
-    var SWITCH_BEFORE = 1200;  // ms antes do fim para iniciar swap
-    var START_AT      = 0.05;  // segundos de offset no início do vídeo inativo
-
-    function setupPair(wrap) {
-      var a = wrap.querySelector('.hero-vid-a');
-      var b = wrap.querySelector('.hero-vid-b');
-      if (!a || !b) return;
-
-      var active   = a;
-      var inactive = b;
-      var swapping = false;
-      var rafId    = null;
-
-      function applyOpacity(el, val) {
-        el.style.transition = 'opacity ' + (CROSSFADE_MS / 1000) + 's ease';
-        el.style.opacity    = String(val);
-      }
-
-      function doSwap() {
-        if (swapping) return;
-        swapping = true;
-
-        inactive.currentTime = START_AT;
-        inactive.play().catch(function () {});
-        applyOpacity(inactive, 1);
-
-        setTimeout(function () {
-          applyOpacity(active, 0);
-          var prev = active;
-          active   = inactive;
-          inactive = prev;
-
-          setTimeout(function () {
-            prev.pause();
-            swapping = false;
-          }, CROSSFADE_MS + 80);
-        }, 60);
-      }
-
-      function tick() {
-        if (!swapping && active.duration > 0) {
-          var msLeft = (active.duration - active.currentTime) * 1000;
-          if (msLeft <= SWITCH_BEFORE) doSwap();
-        }
-        rafId = requestAnimationFrame(tick);
-      }
-
-      function start() {
-        applyOpacity(a, 1);
-        applyOpacity(b, 0);
-        a.play()
-          .then(function () { rafId = requestAnimationFrame(tick); })
-          .catch(function () {
-            /* autoplay bloqueado — tentar no primeiro toque */
-            var resume = function () {
-              a.play().then(function () { rafId = requestAnimationFrame(tick); });
-            };
-            document.addEventListener('touchstart', resume, { once: true });
-            document.addEventListener('click',      resume, { once: true });
-          });
-      }
-
-      start();
-    }
-
-    /* Ativa apenas o wrap visível no viewport atual */
-    var mobile = window.innerWidth < 768;
-    document.querySelectorAll('.hero-vid-wrap').forEach(function (wrap) {
-      if (mobile && wrap.classList.contains('mobile'))  setupPair(wrap);
-      if (!mobile && wrap.classList.contains('desktop')) setupPair(wrap);
-    });
-  }
-
   document.addEventListener('DOMContentLoaded', function () {
     initSmoothScroll();
     heroEntrance();
     initScrollAnimations();
     refreshOnLoad();
-    initVideoCrossfade();
   });
 })();
 </script>
