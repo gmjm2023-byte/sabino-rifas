@@ -99,42 +99,189 @@
   ::-webkit-scrollbar-thumb:hover{background:linear-gradient(0deg,var(--gold-deep),var(--gold-2))}
 
 
-  /* ============ HERO (sem vídeo) ============ */
+  /* ============ HERO 100svh — INFO + RIFA + TICKER ============ */
   .hero-section{
     position:relative;
-    background:
-      radial-gradient(ellipse at 50% 30%, #1a1500 0%, #0d0d0d 55%, #050505 100%);
-    display:flex;flex-direction:column;justify-content:center;align-items:center;
-    padding:env(safe-area-inset-top,0px) 20px 40px;
-    padding-top:max(52px, env(safe-area-inset-top,52px));
-    overflow:hidden;
+    height:100svh; min-height:600px;
+    display:flex; flex-direction:column; align-items:stretch;
+    justify-content:flex-start;
+    overflow:hidden; padding:0;
+    background:radial-gradient(ellipse at 50% 0%, #1a1500 0%, #0d0d0d 60%, #050505 100%);
   }
 
-  /* ── Info card: em fluxo normal (sem vídeo) ── */
+  /* ── Info card: barra de influencer no topo ── */
   .info-card{
     position:relative !important;
     top:auto !important; left:auto !important; bottom:auto !important;
     transform:none !important;
-    margin:0 auto;
-    z-index:10;
+    flex-shrink:0; z-index:10;
+    width:100%; min-width:unset; margin:0;
+    border-radius:0; border:none;
+    border-bottom:1px solid rgba(201,168,76,.2);
+    background:rgba(5,3,0,.90);
+    backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+    padding:max(env(safe-area-inset-top,14px),14px) 20px 12px;
+    text-align:center;
+    animation:none !important;
+    box-shadow:none !important;
   }
-  @keyframes infoFloat{
-    0%,100%{ transform:translateY(0px); }
-    50%    { transform:translateY(-7px); }
+  .info-card.is-floating{ animation:none !important; }
+
+  /* ── IC: badge animado ── */
+  .ic-badge{
+    display:inline-flex; align-items:center; gap:7px;
+    font-family:'Orbitron',sans-serif; font-size:9px;
+    letter-spacing:2.5px; color:rgba(201,168,76,.75);
+    text-transform:uppercase; margin-bottom:6px;
   }
-  .info-card.is-floating{
-    animation:infoBorderSpin 12s linear infinite, infoFloat 4.5s ease-in-out infinite;
+  .ic-dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--gold); flex-shrink:0;
+    box-shadow:0 0 8px var(--gold);
+    animation:icDotPulse 1.8s ease-in-out infinite;
+  }
+  @keyframes icDotPulse{
+    0%,100%{opacity:1;box-shadow:0 0 8px var(--gold),0 0 0 0 rgba(201,168,76,.35)}
+    50%{opacity:.4;box-shadow:0 0 3px var(--gold),0 0 0 5px rgba(201,168,76,0)}
+  }
+  .ic-badge strong{ color:var(--gold-2); font-weight:700; }
+
+  /* ── IC: nome com shimmer ── */
+  .ic-name{
+    font-family:'Orbitron',sans-serif;
+    font-size:clamp(18px,5vw,26px); font-weight:400; margin:0 0 3px;
+    background:linear-gradient(90deg,var(--gold-deep) 0%,var(--gold-2) 40%,#fff8c0 55%,var(--gold-2) 70%,var(--gold-deep) 100%);
+    background-size:200% auto;
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation:nameShimmer 4s ease-in-out infinite;
+  }
+  @keyframes nameShimmer{
+    0%{background-position:0% center}
+    50%{background-position:100% center}
+    100%{background-position:0% center}
   }
 
-  /* ── Rifa acima do ticker ── */
+  /* ── IC: slogan ── */
+  .ic-slogan{
+    font-family:'Orbitron',sans-serif;
+    font-size:clamp(10px,3.2vw,13px); font-weight:700;
+    color:rgba(255,255,255,.88); letter-spacing:.05em;
+    margin:0 0 8px;
+  }
+
+  /* ── IC: stats row ── */
+  .ic-stats{
+    display:flex; align-items:center; justify-content:center;
+    gap:0; margin-bottom:6px;
+  }
+  .ic-stat{
+    display:flex; flex-direction:column; align-items:center;
+    padding:0 14px;
+  }
+  .ic-stat b{
+    font-family:'Orbitron',sans-serif; font-size:13px; font-weight:700;
+    color:var(--gold); line-height:1;
+  }
+  .ic-stat span{
+    font-family:'Orbitron',sans-serif; font-size:7.5px;
+    letter-spacing:1.5px; color:rgba(255,255,255,.35);
+    text-transform:uppercase; margin-top:2px;
+  }
+  .ic-stat-sep{
+    width:1px; height:28px;
+    background:linear-gradient(180deg,transparent,rgba(201,168,76,.25),transparent);
+  }
+
+  /* ── IC: handle ── */
+  .ic-handle{
+    font-family:'Orbitron',sans-serif; font-size:8.5px;
+    letter-spacing:2.5px; color:rgba(255,255,255,.25); margin:0;
+  }
+
+  /* ── Rifa fold: preenche o espaço ── */
   .rifa-fold{
-    width:100%; max-width:920px;
-    margin:0 auto;
-    padding:0 20px;
+    flex:1; min-height:0;
+    display:flex; flex-direction:column;
+    width:100%; max-width:none;
+    padding:0; margin:0; overflow:hidden;
   }
-  @media(max-width:767px){
-    .rifa-fold{ padding:0 16px; }
+  .rifa-active{
+    flex:1 !important; min-height:0;
+    display:flex; flex-direction:column;
+    border-radius:0 !important; margin-bottom:0 !important;
   }
+  .rc-hero{
+    flex:1; min-height:0;
+    aspect-ratio:unset !important;
+  }
+  .rc-hero-img{
+    width:100%; height:100%; object-fit:cover;
+  }
+
+  /* ── Ticker dentro da hero ── */
+  .hero-section .ticker-section{
+    flex-shrink:0; height:52px; padding:0;
+    border-top:1px solid rgba(201,168,76,.12);
+    border-bottom:none; background:#050505;
+  }
+
+  /* ── Moto card animado ── */
+  .moto-card{
+    position:relative; display:flex; align-items:center; gap:14px;
+    padding:16px 18px; margin-bottom:28px;
+    background:linear-gradient(135deg,#021a0d 0%,#010a05 100%);
+    border:1.5px solid rgba(37,211,102,.3);
+    border-radius:16px; text-decoration:none; color:#fff;
+    overflow:hidden; cursor:pointer;
+    transition:border-color .25s, transform .2s;
+    animation:motoGlow 2.5s ease-in-out infinite;
+  }
+  @keyframes motoGlow{
+    0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.4),0 8px 28px rgba(0,0,0,.5)}
+    50%{box-shadow:0 0 0 7px rgba(37,211,102,0),0 8px 28px rgba(37,211,102,.18)}
+  }
+  .moto-card:hover{border-color:rgba(37,211,102,.6);transform:translateY(-2px)}
+  .moto-pulse-wrap{
+    position:absolute;top:50%;left:42px;
+    transform:translate(-50%,-50%);pointer-events:none;
+  }
+  .moto-ring{
+    position:absolute; border-radius:50%;
+    border:1px solid rgba(37,211,102,.45);
+    transform:translate(-50%,-50%);
+    animation:motoRingOut 2s ease-out infinite;
+  }
+  .moto-ring-1{width:56px;height:56px;animation-delay:0s}
+  .moto-ring-2{width:76px;height:76px;animation-delay:.65s}
+  @keyframes motoRingOut{
+    0%{opacity:.7;transform:translate(-50%,-50%) scale(.7)}
+    100%{opacity:0;transform:translate(-50%,-50%) scale(1.5)}
+  }
+  .moto-icon{
+    width:50px;height:50px;border-radius:14px;flex-shrink:0;
+    background:linear-gradient(135deg,#25D366,#128C7E);
+    display:grid;place-items:center;font-size:24px;color:#fff;
+    box-shadow:0 4px 14px rgba(37,211,102,.4);position:relative;z-index:1;
+  }
+  .moto-content{flex:1;min-width:0;position:relative;z-index:1}
+  .moto-eyebrow{
+    font-family:'Orbitron',sans-serif;font-size:7.5px;letter-spacing:2px;
+    color:rgba(37,211,102,.7);text-transform:uppercase;margin-bottom:2px;
+  }
+  .moto-title{
+    font-family:'Orbitron',sans-serif;font-size:clamp(15px,4.5vw,19px);
+    font-weight:900;color:#25D366;line-height:1;margin-bottom:3px;
+    text-shadow:0 0 18px rgba(37,211,102,.45);
+  }
+  .moto-sub{font-size:11px;color:rgba(255,255,255,.45);letter-spacing:.2px}
+  .moto-arrow{
+    flex-shrink:0;width:34px;height:34px;border-radius:50%;
+    border:1px solid rgba(37,211,102,.3);
+    display:grid;place-items:center;
+    color:rgba(37,211,102,.6);font-size:12px;
+    transition:background .2s,color .2s,border-color .2s;
+  }
+  .moto-card:hover .moto-arrow{background:#25D366;color:#fff;border-color:#25D366}
 
   /* CSS smoke + light beams (substituem os vídeos) */
   .fx-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden}
@@ -1135,19 +1282,25 @@
   <div class="fx-layer fx-grain"></div>
 
   <div class="info-card">
-    <div class="badge-verified">
-      <i class="fa-solid fa-circle-check"></i>
-      INFLUENCER VERIFICADO · 129K
+    <div class="ic-badge">
+      <span class="ic-dot"></span>
+      INFLUENCER VERIFICADO · <strong>129K</strong>
     </div>
-    <h2 class="name">Sabino Cabral</h2>
-    <h2 class="title">Vida simples, sonhos grandes 🌾</h2>
-    <p class="handle">@SABINOCABRALBR</p>
+    <h1 class="ic-name">Sabino Cabral</h1>
+    <p class="ic-slogan">Vida simples, sonhos grandes 🌾</p>
+    <div class="ic-stats">
+      <div class="ic-stat"><b>129K</b><span>Seguidores</span></div>
+      <div class="ic-stat-sep"></div>
+      <div class="ic-stat"><b>+500</b><span>Sorteios</span></div>
+      <div class="ic-stat-sep"></div>
+      <div class="ic-stat"><b>100%</b><span>Entregues</span></div>
+    </div>
+    <p class="ic-handle">@SABINOCABRALBR</p>
   </div>
-</section>
 
-<!-- ============ RIFA ATIVA (acima do ticker) ============ -->
-<div class="rifa-fold">
-  <div class="rifa-active gsap-card">
+  <!-- ============ RIFA ATIVA ============ -->
+  <div class="rifa-fold">
+    <div class="rifa-active gsap-card">
 
     <!-- Hero image com overlays editoriais -->
     <div class="rc-hero">
@@ -1214,15 +1367,17 @@
       <span class="cta-arrow-wrap"><i class="fa-solid fa-arrow-right"></i></span>
     </a>
 
-  </div>
-</div><!-- /rifa-fold -->
+    </div>
+  </div><!-- /rifa-fold -->
 
-<!-- ============ TICKER ============ -->
-<div class="ticker-section">
-  <div class="ticker-track" id="ticker">
-    <!-- preenchido por JS para garantir loop perfeito -->
+  <!-- ============ TICKER ============ -->
+  <div class="ticker-section">
+    <div class="ticker-track" id="ticker">
+      <!-- preenchido por JS para garantir loop perfeito -->
+    </div>
   </div>
-</div>
+
+</section><!-- /hero-section -->
 
 <!-- ============ LINKS ============ -->
 <section class="links-section">
@@ -1237,6 +1392,21 @@
     </a>
   </div>
 
+  <!-- MOTO GRATUITA — card animado pulsante -->
+  <a href="#" class="moto-card gsap-card" target="_blank" rel="noopener" aria-label="Moto gratuita para membros da comunidade">
+    <div class="moto-pulse-wrap" aria-hidden="true">
+      <div class="moto-ring moto-ring-1"></div>
+      <div class="moto-ring moto-ring-2"></div>
+    </div>
+    <div class="moto-icon"><i class="fa-solid fa-motorcycle"></i></div>
+    <div class="moto-content">
+      <div class="moto-eyebrow">Exclusivo · Comunidade</div>
+      <div class="moto-title">MOTO GRATUITA</div>
+      <div class="moto-sub">pra quem participa das comunidades</div>
+    </div>
+    <div class="moto-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+  </a>
+
   <!-- GANHADORES — Carrossel de vídeos -->
   <div class="ganhadores-section">
     <div class="ganhadores-head gsap-fade-up">
@@ -1248,6 +1418,24 @@
     </div>
     <div class="carousel-viewport">
       <div class="carousel-track" id="videoTrack">
+
+        <div class="ganh-card">
+          <div class="ganh-img">
+            <img src="assets/ganh-HONDA-BIZ-125.webp" alt="Ganhador Honda Biz 125" loading="lazy">
+          </div>
+          <div class="ganh-overlay">
+            <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
+          </div>
+        </div>
+
+        <div class="ganh-card">
+          <div class="ganh-img">
+            <img src="assets/ganh-HONDA-FOURTRAX-420.webp" alt="Ganhador Quadriciclo Honda Fourtrax 420" loading="lazy">
+          </div>
+          <div class="ganh-overlay">
+            <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
+          </div>
+        </div>
 
         <div class="ganh-card">
           <div class="ganh-img">
