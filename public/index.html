@@ -35,23 +35,38 @@
 
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Sabino Prêmios",
-  "url": "https://sabinopremios.com.br",
-  "sameAs": ["https://www.instagram.com/sabinocabralbr"],
-  "description": "Rifas digitais com entrega garantida. Concorra a carros, motos e prêmios em dinheiro.",
-  "founder": { "@type": "Person", "name": "Sabino Cabral" },
-  "offers": {
-    "@type": "Offer",
-    "name": "Hilux SW4 + Nivus Highline",
-    "price": "0.32",
-    "priceCurrency": "BRL",
-    "availability": "https://schema.org/InStock",
-    "url": "https://sabinopremios.com.br/campanha/sw4-nivus"
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Sabino Prêmios",
+    "url": "https://sabinopremios.com.br",
+    "logo": "https://sabinopremios.com.br/assets/premio-sw4-nivus.jpg",
+    "sameAs": [
+      "https://www.instagram.com/sabinocabralbr",
+      "https://www.youtube.com/@sabinocabralbr"
+    ],
+    "description": "Rifas digitais verificadas com +500 entregas reais. Concorra a carros, motos e prêmios em dinheiro com Sabino Cabral.",
+    "founder": { "@type": "Person", "name": "Sabino Cabral", "sameAs": "https://www.instagram.com/sabinocabralbr" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Rifa Hilux SW4 + Nivus Highline — Cota Premiada",
+    "description": "Concorra à Hilux SW4 + Nivus Highline por apenas R$0,32. Primeiros 20% das cotas vendidas concorrem a R$10.000 extras.",
+    "image": "https://sabinopremios.com.br/assets/premio-sw4-nivus.jpg",
+    "brand": { "@type": "Brand", "name": "Sabino Prêmios" },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://sabinopremios.com.br/campanha/sw4-nivus",
+      "priceCurrency": "BRL",
+      "price": "0.32",
+      "priceValidUntil": "2025-12-31",
+      "availability": "https://schema.org/InStock",
+      "seller": { "@type": "Organization", "name": "Sabino Prêmios" }
+    }
   }
-}
+]
 </script>
 
 <!-- Resource hints -->
@@ -60,8 +75,9 @@
 <link rel="dns-prefetch" href="https://unpkg.com" />
 <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
 
-<!-- Preload rifa cover (above fold) -->
+<!-- Preload rifa cover + video (above fold) -->
 <link rel="preload" as="image" href="assets/premio-sw4-nivus.jpg" />
+<link rel="preload" as="video" href="assets/rifa-video.mp4" type="video/mp4" />
 
 <!-- Icons (non-blocking) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'" />
@@ -117,27 +133,27 @@
     flex-shrink:0; z-index:10;
     width:100%; min-width:unset; margin:0;
     border-radius:0; border:none;
-    border-bottom:1px solid rgba(201,168,76,.2);
-    background:rgba(5,3,0,.90);
-    backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-    padding:max(env(safe-area-inset-top,14px),14px) 20px 12px;
+    border-bottom:1px solid rgba(201,168,76,.18);
+    background:rgba(5,3,0,.92);
+    backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+    padding:max(env(safe-area-inset-top,10px),10px) 20px 10px;
     text-align:center;
     animation:none !important;
-    box-shadow:none !important;
+    box-shadow:0 1px 0 rgba(201,168,76,.06) !important;
   }
   .info-card.is-floating{ animation:none !important; }
 
   /* ── IC: badge animado ── */
   .ic-badge{
     display:inline-flex; align-items:center; gap:7px;
-    font-family:'Orbitron',sans-serif; font-size:9px;
-    letter-spacing:2.5px; color:rgba(201,168,76,.75);
-    text-transform:uppercase; margin-bottom:6px;
+    font-family:'Orbitron',sans-serif; font-size:8.5px;
+    letter-spacing:2px; color:rgba(201,168,76,.7);
+    text-transform:uppercase; margin-bottom:4px;
   }
   .ic-dot{
-    width:7px; height:7px; border-radius:50%;
+    width:6px; height:6px; border-radius:50%;
     background:var(--gold); flex-shrink:0;
-    box-shadow:0 0 8px var(--gold);
+    box-shadow:0 0 7px var(--gold);
     animation:icDotPulse 1.8s ease-in-out infinite;
   }
   @keyframes icDotPulse{
@@ -149,7 +165,7 @@
   /* ── IC: nome com shimmer ── */
   .ic-name{
     font-family:'Orbitron',sans-serif;
-    font-size:clamp(18px,5vw,26px); font-weight:400; margin:0 0 3px;
+    font-size:clamp(16px,4.5vw,22px); font-weight:400; margin:0 0 2px;
     background:linear-gradient(90deg,var(--gold-deep) 0%,var(--gold-2) 40%,#fff8c0 55%,var(--gold-2) 70%,var(--gold-deep) 100%);
     background-size:200% auto;
     -webkit-background-clip:text; background-clip:text; color:transparent;
@@ -163,39 +179,38 @@
 
   /* ── IC: slogan ── */
   .ic-slogan{
-    font-family:'Orbitron',sans-serif;
-    font-size:clamp(10px,3.2vw,13px); font-weight:700;
-    color:rgba(255,255,255,.88); letter-spacing:.05em;
-    margin:0 0 8px;
+    font-size:clamp(10px,3vw,12px); font-weight:400;
+    color:rgba(255,255,255,.55); letter-spacing:.02em;
+    margin:0 0 6px;
   }
 
   /* ── IC: stats row ── */
   .ic-stats{
     display:flex; align-items:center; justify-content:center;
-    gap:0; margin-bottom:6px;
+    gap:0; margin-bottom:5px;
   }
   .ic-stat{
     display:flex; flex-direction:column; align-items:center;
-    padding:0 14px;
+    padding:0 12px;
   }
   .ic-stat b{
-    font-family:'Orbitron',sans-serif; font-size:13px; font-weight:700;
+    font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700;
     color:var(--gold); line-height:1;
   }
   .ic-stat span{
-    font-family:'Orbitron',sans-serif; font-size:7.5px;
-    letter-spacing:1.5px; color:rgba(255,255,255,.35);
+    font-family:'Orbitron',sans-serif; font-size:7px;
+    letter-spacing:1.5px; color:rgba(255,255,255,.3);
     text-transform:uppercase; margin-top:2px;
   }
   .ic-stat-sep{
-    width:1px; height:28px;
-    background:linear-gradient(180deg,transparent,rgba(201,168,76,.25),transparent);
+    width:1px; height:24px;
+    background:linear-gradient(180deg,transparent,rgba(201,168,76,.2),transparent);
   }
 
   /* ── IC: handle ── */
   .ic-handle{
-    font-family:'Orbitron',sans-serif; font-size:8.5px;
-    letter-spacing:2.5px; color:rgba(255,255,255,.25); margin:0;
+    font-family:'Orbitron',sans-serif; font-size:8px;
+    letter-spacing:2px; color:rgba(255,255,255,.2); margin:0;
   }
 
   /* ── Rifa fold: preenche o espaço restante da hero ── */
@@ -326,116 +341,6 @@
   @keyframes smokeShift{
     0%{transform:translate(-3%,-2%) scale(1.05)}
     100%{transform:translate(4%,3%) scale(1.15)}
-  }
-  /* Nav labels */
-  .nav-labels{
-    position:absolute;top:30px;width:100%;
-    display:flex;justify-content:space-between;
-    padding:0 60px;z-index:10;
-  }
-  .nav-labels h2{
-    color:rgba(255,255,255,.85);
-    font-family:'Orbitron',sans-serif;
-    font-size:15px;font-weight:500;letter-spacing:2px;margin:0;
-    text-shadow:0 1px 8px rgba(0,0,0,.55);
-  }
-
-  /* Scroll circle */
-  .scroll-indicator{
-    position:absolute;top:100px;left:50%;transform:translateX(-50%);z-index:10;
-  }
-  .scroll-circle{
-    width:100px;height:100px;
-    border:1px solid rgba(201,168,76,.4);
-    border-radius:50%;
-    display:flex;align-items:center;justify-content:center;position:relative;
-    box-shadow:0 0 22px rgba(201,168,76,.15) inset;
-  }
-  .scroll-circle-svg{
-    position:absolute;animation:rotate 15s linear infinite;
-    width:100%;height:100%;
-  }
-  .scroll-arrow{
-    color:var(--gold);font-size:22px;
-    animation:downUp 2s ease infinite;position:relative;z-index:2;
-  }
-  @keyframes rotate{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-  @keyframes downUp{
-    0%{transform:translateY(0);opacity:.7}
-    40%{transform:translateY(5px);opacity:1}
-    60%{transform:translateY(3px);opacity:1}
-    100%{transform:translateY(0);opacity:.7}
-  }
-
-
-  /* Info card overlay */
-  @property --info-angle {
-    syntax: '<angle>';
-    inherits: false;
-    initial-value: 0deg;
-  }
-  .info-card{
-    position:absolute;top:240px;left:50%;
-    transform:translateX(-50%);z-index:20;
-    background:
-      rgba(5,3,0,.60) padding-box,
-      conic-gradient(
-        from var(--info-angle),
-        rgba(70,58,42,.8) 0deg,
-        rgba(70,58,42,.8) 270deg,
-        rgba(201,168,76,.04) 300deg,
-        rgba(220,180,70,.75) 335deg,
-        rgba(240,210,110,.9) 346deg,
-        rgba(220,180,70,.75) 356deg,
-        rgba(70,58,42,.8) 360deg
-      ) border-box;
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-    border-radius:16px;
-    border:1px solid transparent;
-    padding:24px 48px 20px;text-align:center;min-width:520px;
-    box-shadow:0 20px 50px rgba(0,0,0,.6);
-    animation:infoBorderSpin 12s linear infinite;
-  }
-  @keyframes infoBorderSpin { to { --info-angle: 360deg; } }
-  @keyframes infoFloat {
-    0%,100%{ transform:translateX(-50%) translateY(0px); }
-    50%    { transform:translateX(-50%) translateY(-7px); }
-  }
-  .info-card.is-floating{
-    animation:infoBorderSpin 12s linear infinite, infoFloat 4.5s ease-in-out infinite;
-  }
-  .info-card .badge-verified{
-    display:inline-flex;align-items:center;gap:6px;
-    font-family:'Orbitron',sans-serif;font-size:9.5px;
-    color:rgba(201,168,76,.7);letter-spacing:2px;
-    margin-bottom:12px;
-  }
-  .info-card .badge-verified i{font-size:10px;color:var(--gold)}
-  .info-card h2.name{
-    font-family:'Orbitron',sans-serif;
-    font-size:24px;font-weight:400;margin:0 0 4px 0;
-    color:var(--gold);
-  }
-  .info-card h2.title{
-    color:#fff;font-family:'Orbitron',sans-serif;
-    font-size:24px;font-weight:700;margin:0 0 4px 0;letter-spacing:3px;
-  }
-  .info-card .handle{
-    color:rgba(255,255,255,.35);font-family:'Orbitron',sans-serif;
-    font-size:10px;letter-spacing:2.5px;margin:0 0 14px;
-  }
-  .scroll-down-hint{
-    margin:12px 0 0;padding:10px 0 0;
-    border-top:1px solid rgba(255,255,255,.08);
-    color:rgba(255,255,255,.5);
-    font-size:10px;font-family:'Orbitron',sans-serif;
-    letter-spacing:2px;text-transform:uppercase;
-    display:flex;align-items:center;justify-content:center;gap:7px;
-  }
-  .scroll-down-hint i{
-    font-size:9px;opacity:.6;
-    animation:downUp 2s ease infinite;
   }
 
   /* ============ TICKER ============ */
@@ -820,10 +725,6 @@
     display:flex;align-items:center;gap:10px;
   }
   .ganhadores-head .head-title i{color:var(--gold)}
-  .ganhadores-head .head-sub{
-    font-size:11.5px;color:var(--muted);letter-spacing:1px;
-    font-family:'Orbitron',sans-serif;text-transform:uppercase;
-  }
   .ganhadores-head .carousel-nav{ display:none; }
 
   .carousel-viewport{
@@ -863,7 +764,11 @@
     display:flex;flex-direction:column;
     justify-content:space-between;
     padding:10px 10px 12px;
-    background:linear-gradient(180deg, rgba(0,0,0,.55) 0%, transparent 45%);
+    background:linear-gradient(180deg,
+      rgba(0,0,0,.62) 0%,
+      transparent 38%,
+      transparent 58%,
+      rgba(0,0,0,.72) 100%);
   }
   .ganh-badge{
     display:inline-flex;align-items:center;gap:5px;
@@ -875,6 +780,15 @@
     align-self:flex-start;
   }
   .ganh-badge i{ font-size:8px; }
+  .ganh-label{
+    font-family:'Orbitron',sans-serif;
+    font-size:10px;font-weight:700;
+    color:#fff;letter-spacing:.5px;
+    text-transform:uppercase;
+    text-shadow:0 1px 6px rgba(0,0,0,.9),0 0 12px rgba(0,0,0,.7);
+    line-height:1.2;
+    align-self:flex-start;
+  }
 
   /* ============ BANNER BUTTONS (IG / WPP) ============ */
   .banner-row{
@@ -1060,36 +974,17 @@
 
   /* ============ MOBILE ============ */
   @media(max-width:767px){
-    .info-card{
-      min-width:92vw;
-      padding:14px 20px;
-    }
-    .scroll-down-hint{display:none}
-    /* Compactar card para caber no espaço abaixo do vídeo */
-    .info-card .badge-verified{margin-bottom:8px}
-    .info-card h2.name{margin-bottom:2px}
-    .info-card h2.title{margin-bottom:2px}
-    .info-card .handle{margin:0}
     .link-card-row{grid-template-columns:1fr}
-    .nav-labels{padding:0 20px}
-    .nav-labels h2{font-size:12px;letter-spacing:1.5px}
-    .info-card h2.name{font-size:19px}
-    .info-card h2.title{font-size:clamp(13px,4.2vw,17px);letter-spacing:.03em}
-    .scroll-indicator{display:none}
-    .scroll-circle{width:84px;height:84px}
     .card-title{font-size:22px}
     .card-half .card-title{font-size:20px}
     .ticket-stack,.trophy-icon{width:90px;font-size:64px;right:14px}
     .ig-icon{width:60px;height:60px;font-size:28px;right:16px}
-    .hero-image-fallback .monogram{font-size:160px;padding-bottom:40px}
-    .links-section{padding:36px 16px 50px}
+    .links-section{padding:32px 16px 48px}
     .card-inner{padding:20px 22px}
-    .rc-prize-name{font-size:clamp(18px,5vw,22px)}
     .rc-bonus-value{font-size:clamp(15px,4vw,18px)}
     .rc-price-value{font-size:clamp(26px,7.5vw,32px)}
     .rc-bonus{padding:12px 14px}
     .rc-price{padding:12px 14px}
-    .video-card{flex:0 0 calc((100% - 14px) / 2);}
     .notif-stack{left:10px;right:10px;bottom:12px;max-width:none}
     .notif{min-width:0;font-size:12.5px}
     .banner-row{grid-template-columns:1fr;gap:10px;margin-bottom:22px}
@@ -1099,9 +994,9 @@
     .ganhadores-head .head-title,.faq-head .head-title{font-size:16px;letter-spacing:1.5px}
   }
   @media(max-width:430px){
-    .video-card{flex:0 0 80%;}
-    .info-card{padding:14px 16px}
-    .info-card h2.name,.info-card h2.title{font-size:18px}
+    .info-card{padding:12px 14px}
+    .ic-stats{gap:0}
+    .ic-stat{padding:0 10px}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -1173,14 +1068,23 @@
   /* ============ RESPONSIVE TYPOGRAPHY ============ */
   .card-title{font-size:clamp(19px,5vw,26px)}
   .card-half .card-title{font-size:clamp(17px,4.5vw,22px)}
-  .info-card h2.name,.info-card h2.title{font-size:clamp(17px,5.5vw,26px)}
-  .info-pill.primary .pill-title{font-size:clamp(18px,5vw,22px)}
   .ganhadores-head .head-title,.faq-head .head-title{font-size:clamp(15px,4vw,18px)}
 
   /* ============ SECTION SPACING ============ */
-  .ganhadores-section{margin-bottom:clamp(22px,5vw,36px)}
+  .ganhadores-section{margin-bottom:clamp(24px,5vw,40px)}
   .faq-section{margin-bottom:clamp(22px,5vw,36px)}
-  .links-section{padding-top:clamp(32px,6vw,56px)}
+  .links-section{padding-top:clamp(28px,5vw,48px)}
+
+  /* ============ GANHADORES SECTION — carousel spacing ============ */
+  .ganhadores-head{margin-bottom:12px}
+  .ganhadores-head .head-sub{
+    font-size:10.5px;
+    color:rgba(255,255,255,.38);
+    letter-spacing:.5px;
+    font-family:'Poppins',sans-serif;
+    font-style:italic;
+    text-transform:none;
+  }
 
   /* ============ RIFA CARD — ANIMATED BORDER ============ */
   @property --rifa-angle {
@@ -1210,23 +1114,26 @@
   .rifa-cta {
     display: flex; align-items: center; justify-content: space-between;
     width: 100%; margin: 0; border-radius: 0;
-    padding: 20px 22px;
+    padding: 18px 22px;
     position: relative; overflow: hidden;
-    background: #0c0900;
+    background: linear-gradient(90deg, #100d00 0%, #0c0900 100%);
     border: none;
-    border-top: 1px solid rgba(201,168,76,.25);
+    border-top: 1px solid rgba(201,168,76,.3);
     color: #fff; text-decoration: none;
     -webkit-tap-highlight-color: transparent;
     cursor: pointer;
-    transition: background .2s ease;
+    transition: background .2s ease, box-shadow .2s ease;
   }
   .rifa-cta::before {
     content: "";
     position: absolute; inset: 0;
-    background: linear-gradient(90deg, rgba(201,168,76,.06) 0%, transparent 60%);
+    background: linear-gradient(90deg, rgba(201,168,76,.10) 0%, transparent 55%);
     pointer-events: none;
   }
-  .rifa-cta:hover { background: #141000; }
+  .rifa-cta:hover {
+    background: linear-gradient(90deg, #1a1200 0%, #110f00 100%);
+    box-shadow: inset 0 1px 0 rgba(201,168,76,.2);
+  }
   .rifa-cta:hover .cta-arrow-wrap { transform: translateX(4px); }
   .rifa-cta:active { transform: scale(.985) !important; }
   .rifa-cta-label {
@@ -1261,20 +1168,34 @@
 
   /* ============ TABLET (768–1024) ============ */
   @media(min-width:768px) and (max-width:1024px){
-    .info-card{ min-width:clamp(360px,72vw,520px); padding:22px 36px 18px; }
     .links-section{ max-width:700px }
     .card-title{ font-size:clamp(20px,3.5vw,26px) }
+    .rifa-fold{ padding:14px 24px 0 }
   }
 
   /* ============ DESKTOP (≥1025px) ============ */
   @media(min-width:1025px){
-    .info-card{ min-width:520px; }
+    .rifa-fold{ padding:16px 32px 0 }
   }
 
   /* ============ WIDE DESKTOP (≥1440px) ============ */
   @media(min-width:1440px){
     .links-section{ max-width:1000px }
-    .info-card{ min-width:580px; padding:28px 60px 24px }
+    .rifa-fold{ padding:20px 48px 0 }
+  }
+
+  /* ============ DESKTOP CENTERING ============ */
+  /* Página mobile-first: centraliza e limita largura em telas maiores */
+  @media(min-width:768px){
+    html{ background:#030303; }
+    body{
+      max-width:520px !important;
+      margin:0 auto;
+      min-height:100vh;
+      box-shadow:0 0 80px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.03);
+      overflow-x:hidden !important;
+    }
+    .page-texture{ max-width:520px; left:50%; transform:translateX(-50%); }
   }
 
   /* ============ THEME TOKENS (lux — fixo) ============ */
@@ -1304,7 +1225,7 @@
       INFLUENCER VERIFICADO · <strong>129K</strong>
     </div>
     <h1 class="ic-name">Sabino Cabral</h1>
-    <p class="ic-slogan">Vida simples, sonhos grandes 🌾</p>
+    <p class="ic-slogan">Vida simples, sonhos grandes</p>
     <div class="ic-stats">
       <div class="ic-stat"><b>129K</b><span>Seguidores</span></div>
       <div class="ic-stat-sep"></div>
@@ -1394,18 +1315,87 @@
 <!-- ============ LINKS ============ -->
 <section class="links-section">
 
+  <!-- GANHADORES — 2ª dobra, antes dos botões -->
+  <div class="ganhadores-section">
+    <div class="ganhadores-head gsap-fade-up">
+      <h2 class="head-title"><i class="fa-solid fa-trophy"></i> GANHADORES</h2>
+      <span class="head-sub">+500 entregas reais</span>
+    </div>
+    <div class="carousel-viewport">
+      <div class="carousel-track" id="videoTrack">
+
+        <div class="ganh-card">
+          <div class="ganh-img"><img src="assets/ganh-HONDA-BIZ-125.jpg" alt="Ganhador Honda Biz 125" loading="lazy"></div>
+          <div class="ganh-overlay">
+            <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
+            <div class="ganh-label">Honda Biz 125</div>
+          </div>
+        </div>
+
+        <div class="ganh-card">
+          <div class="ganh-img"><img src="assets/ganh-HONDA-FOURTRAX-420.jpg" alt="Ganhador Honda Fourtrax 420" loading="lazy"></div>
+          <div class="ganh-overlay">
+            <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
+            <div class="ganh-label">Fourtrax 420</div>
+          </div>
+        </div>
+
+        <div class="ganh-card">
+          <div class="ganh-img"><img src="assets/ganh-L200-TRITON.webp" alt="Ganhador L200 Triton" loading="lazy"></div>
+          <div class="ganh-overlay">
+            <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
+            <div class="ganh-label">L200 Triton</div>
+          </div>
+        </div>
+
+        <div class="ganh-card">
+          <div class="ganh-img"><img src="assets/ganh-RAM-REBEL-1500.webp" alt="Ganhador RAM Rebel 1500" loading="lazy"></div>
+          <div class="ganh-overlay">
+            <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
+            <div class="ganh-label">RAM Rebel 1500</div>
+          </div>
+        </div>
+
+        <div class="ganh-card">
+          <div class="ganh-img"><img src="assets/ganh-FORD-RANGER-V6.webp" alt="Ganhador Ford Ranger V6" loading="lazy"></div>
+          <div class="ganh-overlay">
+            <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
+            <div class="ganh-label">Ranger V6</div>
+          </div>
+        </div>
+
+        <div class="ganh-card">
+          <div class="ganh-img"><img src="assets/ganh-YAMAHA-FACTOR-01.webp" alt="Ganhador Yamaha Factor" loading="lazy"></div>
+          <div class="ganh-overlay">
+            <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
+            <div class="ganh-label">Yamaha Factor</div>
+          </div>
+        </div>
+
+        <div class="ganh-card">
+          <div class="ganh-img"><img src="assets/ganh-YAMAHA-FACTOR-02.webp" alt="Ganhador Yamaha Factor" loading="lazy"></div>
+          <div class="ganh-overlay">
+            <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
+            <div class="ganh-label">Yamaha Factor</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   <!-- Botões IG + WPP (lado a lado) -->
   <div class="banner-row">
     <a href="https://www.instagram.com/sabinocabralbr?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="banner-link" target="_blank" rel="noopener" aria-label="Conheça nosso Instagram">
       <img src="assets/btn-instagram.png" alt="Conheça nosso Instagram" loading="lazy" />
     </a>
-    <a href="#" class="banner-link" target="_blank" rel="noopener" aria-label="Participe da nossa Comunidade no WhatsApp">
-      <img src="assets/btn-whatsapp.png" alt="Moto gratuita pra quem participa das comunidades" loading="lazy" />
+    <a href="#" class="banner-link" target="_blank" rel="noopener" aria-label="Comunidade WhatsApp — Moto Gratuita">
+      <img src="assets/btn-whatsapp.png" alt="Comunidade WhatsApp — Moto Gratuita" loading="lazy" />
     </a>
   </div>
 
-  <!-- MOTO GRATUITA — card informativo pulsante -->
-  <div class="moto-card gsap-card" role="note" aria-label="Benefício: Moto gratuita para membros da comunidade">
+  <!-- MOTO GRATUITA — card informativo -->
+  <div class="moto-card gsap-card" role="note" aria-label="Moto gratuita para membros da comunidade">
     <div class="moto-pulse-wrap" aria-hidden="true">
       <div class="moto-ring moto-ring-1"></div>
       <div class="moto-ring moto-ring-2"></div>
@@ -1417,85 +1407,6 @@
       <div class="moto-sub">pra quem participa das comunidades</div>
     </div>
     <div class="moto-arrow"><i class="fa-solid fa-gift"></i></div>
-  </div>
-
-  <!-- GANHADORES — Carrossel de vídeos -->
-  <div class="ganhadores-section">
-    <div class="ganhadores-head gsap-fade-up">
-      <h3 class="head-title"><i class="fa-solid fa-trophy"></i> GANHADORES</h3>
-      <div class="carousel-nav">
-        <button id="prevVideo" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
-        <button id="nextVideo" aria-label="Próximo"><i class="fa-solid fa-chevron-right"></i></button>
-      </div>
-    </div>
-    <div class="carousel-viewport">
-      <div class="carousel-track" id="videoTrack">
-
-        <div class="ganh-card">
-          <div class="ganh-img">
-            <img src="assets/ganh-HONDA-BIZ-125.jpg" alt="Ganhador Honda Biz 125" loading="lazy">
-          </div>
-          <div class="ganh-overlay">
-            <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
-          </div>
-        </div>
-
-        <div class="ganh-card">
-          <div class="ganh-img">
-            <img src="assets/ganh-HONDA-FOURTRAX-420.jpg" alt="Ganhador Quadriciclo Honda Fourtrax 420" loading="lazy">
-          </div>
-          <div class="ganh-overlay">
-            <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
-          </div>
-        </div>
-
-        <div class="ganh-card">
-          <div class="ganh-img">
-            <img src="assets/ganh-L200-TRITON.webp" alt="Ganhador Mitsubishi L200 Triton" loading="lazy">
-          </div>
-          <div class="ganh-overlay">
-            <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
-          </div>
-        </div>
-
-        <div class="ganh-card">
-          <div class="ganh-img">
-            <img src="assets/ganh-RAM-REBEL-1500.webp" alt="Ganhador RAM Rebel 1500" loading="lazy">
-          </div>
-          <div class="ganh-overlay">
-            <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
-          </div>
-        </div>
-
-        <div class="ganh-card">
-          <div class="ganh-img">
-            <img src="assets/ganh-FORD-RANGER-V6.webp" alt="Ganhador Ford Ranger V6" loading="lazy">
-          </div>
-          <div class="ganh-overlay">
-            <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
-          </div>
-        </div>
-
-        <div class="ganh-card">
-          <div class="ganh-img">
-            <img src="assets/ganh-YAMAHA-FACTOR-01.webp" alt="Ganhador Yamaha Factor 0KM" loading="lazy">
-          </div>
-          <div class="ganh-overlay">
-            <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
-          </div>
-        </div>
-
-        <div class="ganh-card">
-          <div class="ganh-img">
-            <img src="assets/ganh-YAMAHA-FACTOR-02.webp" alt="Ganhador Yamaha Factor 0KM" loading="lazy">
-          </div>
-          <div class="ganh-overlay">
-            <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
   </div>
 
   <!-- FAQ -->
@@ -1728,26 +1639,16 @@
   /* ── 2. Hero entrance (acima da dobra, sem ScrollTrigger) ── */
   function heroEntrance() {
     gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', function () {
-      gsap.timeline({ delay: 0.3 })
-        .fromTo('.nav-labels h2',
-          { opacity: 0, y: -14 },
-          { opacity: 1, y: 0, stagger: 0.1, duration: 0.55, ease: 'power2.out' })
-        .fromTo('.scroll-indicator',
-          { opacity: 0, scale: 0.84 },
-          { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.5)' }, '-=0.25')
+      gsap.timeline({ delay: 0.15 })
         .fromTo('.info-card',
-          { opacity: 0, y: 28, scale: 0.97 },
-          {
-            opacity: 1, y: 0, scale: 1, duration: 0.75, ease: 'power3.out',
-            onComplete: function () {
-              var card = document.querySelector('.info-card');
-              if (card) {
-                /* limpa transform inline do GSAP e entrega ao CSS float */
-                gsap.set(card, { clearProps: 'transform' });
-                setTimeout(function () { card.classList.add('is-floating'); }, 60);
-              }
-            }
-          }, '-=0.35');
+          { opacity: 0, y: -18 },
+          { opacity: 1, y: 0, duration: 0.55, ease: 'power3.out' })
+        .fromTo('.rifa-active',
+          { opacity: 0, y: 24, scale: 0.975 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'power3.out' }, '-=0.3')
+        .fromTo('.ticker-section',
+          { opacity: 0 },
+          { opacity: 1, duration: 0.45, ease: 'power2.out' }, '-=0.2');
     });
   }
 
