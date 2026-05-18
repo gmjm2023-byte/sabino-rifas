@@ -205,11 +205,14 @@
     width:100%; max-width:none;
     padding:10px 16px 0; margin:0; overflow:hidden;
   }
-  /* rifa-active preserva border-radius e visual original */
+  /* rifa-active preenche o fold — CTA fica ancorado no fundo */
   .rifa-active{
     flex:1 !important; min-height:0;
     display:flex; flex-direction:column;
-    /* border-radius e margin mantidos do CSS base */
+  }
+  /* CTA ancorado no fundo da rifa-active */
+  .hero-section .rifa-cta{
+    margin-top:auto;
   }
   /* rc-hero mantém 16:9 — vídeo aparece sem recortes */
   .rc-hero{
@@ -221,9 +224,9 @@
     width:100%; display:block;
     object-fit:cover;
   }
-  /* Centraliza o card verticalmente no espaço disponível */
+  /* Card alinhado ao topo com padding */
   .rifa-fold{
-    justify-content:center;
+    justify-content:flex-start;
   }
 
   /* ── Ticker dentro da hero ── */
