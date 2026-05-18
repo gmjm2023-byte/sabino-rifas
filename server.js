@@ -1,23 +1,48 @@
 const express = require('express');
 const path = require('path');
+const crypto = require('crypto');
+const fs = require('fs');
 const app = express();
 
-// Assets (imagens, fontes, etc) — cache longo
+// Helper: gera ETag baseado no conteúdo do arquivo
+function fileETag(filePath) {
+  try {
+    const stat = fs.statSync(filePath);
+    return `"${stat.mtimeMs.toString(16)}-${stat.size.toString(16)}"`;
+  } catch { return null; }
+}
+
+// HTML: nunca fica em cache — always fresh
+const noCache = (res) => {
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  res.setHeader('Surrogate-Control', 'no-store');
+};
+
+// Assets estáticos com cache inteligente (ETag + Last-Modified)
+// Browser revalida a cada request; só baixa de novo se o arquivo mudou
 app.use(express.static(path.join(__dirname, 'public'), {
-  maxAge: '7d',
+  etag: true,
+  lastModified: true,
+  maxAge: 0,                        // força revalidação em todo request
   setHeaders: (res, filePath) => {
-    // HTML nunca fica em cache — sempre busca versão mais nova
     if (filePath.endsWith('.html')) {
-      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-      res.setHeader('Pragma', 'no-cache');
-      res.setHeader('Expires', '0');
+      noCache(res);
+    } else {
+      // assets: revalida sempre, usa cache local se não mudou (304 Not Modified)
+      res.setHeader('Cache-Control', 'no-cache');
     }
   }
 }));
 
+// SPA fallback → index.html (sempre sem cache)
 app.get('*', (req, res) => {
-  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  const indexPath = path.join(__dirname, 'public', 'index.html');
+  noCache(res);
+  res.sendFile(indexPath);
 });
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Sabino Rifas rodando na porta', process.env.PORT || 3000);
+});
