@@ -198,20 +198,23 @@
     letter-spacing:2.5px; color:rgba(255,255,255,.25); margin:0;
   }
 
-  /* ── Rifa fold: preenche o espaço ── */
+  /* ── Rifa fold: preenche o espaço restante da hero ── */
   .rifa-fold{
     flex:1; min-height:0;
     display:flex; flex-direction:column;
     width:100%; max-width:none;
     padding:0; margin:0; overflow:hidden;
   }
+  /* rifa-active preserva border-radius e visual original */
   .rifa-active{
     flex:1 !important; min-height:0;
     display:flex; flex-direction:column;
-    border-radius:0 !important; margin-bottom:0 !important;
+    /* border-radius e margin mantidos do CSS base */
   }
+  /* Apenas o rc-hero (imagem) cresce — seções abaixo ficam com altura fixa */
   .rc-hero{
-    flex:1; min-height:0;
+    flex:1 !important;
+    min-height:120px;
     aspect-ratio:unset !important;
   }
   .rc-hero-img{
@@ -231,16 +234,14 @@
     padding:16px 18px; margin-bottom:28px;
     background:linear-gradient(135deg,#021a0d 0%,#010a05 100%);
     border:1.5px solid rgba(37,211,102,.3);
-    border-radius:16px; text-decoration:none; color:#fff;
-    overflow:hidden; cursor:pointer;
-    transition:border-color .25s, transform .2s;
+    border-radius:16px; color:#fff;
+    overflow:hidden; cursor:default;
     animation:motoGlow 2.5s ease-in-out infinite;
   }
   @keyframes motoGlow{
     0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.4),0 8px 28px rgba(0,0,0,.5)}
     50%{box-shadow:0 0 0 7px rgba(37,211,102,0),0 8px 28px rgba(37,211,102,.18)}
   }
-  .moto-card:hover{border-color:rgba(37,211,102,.6);transform:translateY(-2px)}
   .moto-pulse-wrap{
     position:absolute;top:50%;left:42px;
     transform:translate(-50%,-50%);pointer-events:none;
@@ -276,12 +277,10 @@
   .moto-sub{font-size:11px;color:rgba(255,255,255,.45);letter-spacing:.2px}
   .moto-arrow{
     flex-shrink:0;width:34px;height:34px;border-radius:50%;
-    border:1px solid rgba(37,211,102,.3);
+    border:1px solid rgba(37,211,102,.2);
     display:grid;place-items:center;
-    color:rgba(37,211,102,.6);font-size:12px;
-    transition:background .2s,color .2s,border-color .2s;
+    color:rgba(37,211,102,.45);font-size:12px;
   }
-  .moto-card:hover .moto-arrow{background:#25D366;color:#fff;border-color:#25D366}
 
   /* CSS smoke + light beams (substituem os vídeos) */
   .fx-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden}
@@ -1392,8 +1391,8 @@
     </a>
   </div>
 
-  <!-- MOTO GRATUITA — card animado pulsante -->
-  <a href="#" class="moto-card gsap-card" target="_blank" rel="noopener" aria-label="Moto gratuita para membros da comunidade">
+  <!-- MOTO GRATUITA — card informativo pulsante -->
+  <div class="moto-card gsap-card" role="note" aria-label="Benefício: Moto gratuita para membros da comunidade">
     <div class="moto-pulse-wrap" aria-hidden="true">
       <div class="moto-ring moto-ring-1"></div>
       <div class="moto-ring moto-ring-2"></div>
@@ -1404,8 +1403,8 @@
       <div class="moto-title">MOTO GRATUITA</div>
       <div class="moto-sub">pra quem participa das comunidades</div>
     </div>
-    <div class="moto-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-  </a>
+    <div class="moto-arrow"><i class="fa-solid fa-gift"></i></div>
+  </div>
 
   <!-- GANHADORES — Carrossel de vídeos -->
   <div class="ganhadores-section">
