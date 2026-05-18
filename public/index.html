@@ -204,29 +204,44 @@
     display:flex; flex-direction:column;
     width:100%; max-width:none;
     padding:10px 16px 0; margin:0; overflow:hidden;
+    justify-content:flex-start;
   }
-  /* rifa-active preenche o fold — CTA fica ancorado no fundo */
+  /* rifa-active preenche o fold — layout igual ao exemplo */
   .rifa-active{
     flex:1 !important; min-height:0;
     display:flex; flex-direction:column;
   }
-  /* CTA ancorado no fundo da rifa-active */
+  /* CTA ancorado no fundo */
   .hero-section .rifa-cta{
     margin-top:auto;
   }
-  /* rc-hero mantém 16:9 — vídeo aparece sem recortes */
+  /* rc-hero (video) preenche o espaço disponível */
   .rc-hero{
-    aspect-ratio:16/9 !important;
-    flex:none !important;
-    min-height:unset !important;
+    flex:1 !important;
+    min-height:0 !important;
+    aspect-ratio:unset !important;
   }
   .rc-hero-video{
-    width:100%; display:block;
-    object-fit:cover;
+    width:100%; height:100%;
+    object-fit:cover; display:block;
   }
-  /* Card alinhado ao topo com padding */
-  .rifa-fold{
-    justify-content:flex-start;
+  /* Header bar acima do vídeo */
+  .rc-prize-header{
+    flex-shrink:0;
+    background:rgba(8,6,0,.96);
+    border-bottom:1px solid rgba(201,168,76,.25);
+    padding:9px 14px;
+    text-align:center;
+    font-family:'Orbitron',sans-serif;
+    font-size:10px; font-weight:700;
+    letter-spacing:.8px; color:#fff;
+    text-transform:uppercase;
+  }
+  .rph-gold{ color:var(--gold); }
+  /* Oculta overlay de texto que estava sobre o vídeo */
+  .hero-section .rc-hero-bottom{ display:none; }
+  /* UNUSED — kept for compatibility */
+  .hero-section .rc-hero-top{ display:none;
   }
 
   /* ── Ticker dentro da hero ── */
@@ -642,9 +657,7 @@
   }
   .rc-hero::after{
     content:"";position:absolute;inset:0;
-    background:
-      linear-gradient(180deg,rgba(0,0,0,.5) 0%,transparent 30%,transparent 42%,rgba(0,0,0,.9) 100%),
-      linear-gradient(90deg,rgba(0,0,0,.12) 0%,transparent 40%);
+    background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,transparent 25%,transparent 75%,rgba(0,0,0,.22) 100%);
     pointer-events:none;
   }
   .rc-hero-top{
@@ -1309,23 +1322,16 @@
   <div class="rifa-fold">
     <div class="rifa-active gsap-card">
 
-    <!-- Hero image com overlays editoriais -->
+    <!-- Header bar com nome do prêmio -->
+    <div class="rc-prize-header">
+      HILUX <span class="rph-gold">SW4</span> + NIVUS <span class="rph-gold">HIGHLINE</span> (COTA <span class="rph-gold">PREMIADA</span>)
+    </div>
+
+    <!-- Vídeo cinemagraph — sem overlays de texto -->
     <div class="rc-hero">
       <video class="rc-hero-video" autoplay loop muted playsinline webkit-playsinline preload="auto" poster="assets/premio-sw4-nivus.jpg" aria-label="Hilux SW4 + Nivus Highline — Duplo Prêmio">
         <source src="assets/rifa-video.mp4" type="video/mp4">
       </video>
-      <div class="rc-hero-top">
-        <span class="rc-live-badge">
-          <span class="rc-live-dot"></span>Ao Vivo Agora
-        </span>
-      </div>
-      <div class="rc-hero-bottom">
-        <div class="rc-prize-eyebrow">Duplo Prêmio</div>
-        <div class="rc-prize-name">
-          HILUX SW4
-          <span class="rc-prize-trim">+ NIVUS HIGHLINE (Cota Premiada)</span>
-        </div>
-      </div>
     </div>
 
     <!-- Banner promo -->
