@@ -60,9 +60,8 @@
 <link rel="dns-prefetch" href="https://unpkg.com" />
 <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
 
-<!-- Preload hero video (device-specific) -->
-<link rel="preload" as="video" href="assets/hero-desktop.mp4" media="(max-width:767px)" />
-<link rel="preload" as="video" href="assets/hero-mobile.mp4" media="(min-width:768px)" />
+<!-- Preload rifa cover (above fold) -->
+<link rel="preload" as="image" href="assets/premio-sw4-nivus.jpg" />
 
 <!-- Icons (non-blocking) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'" />
@@ -100,14 +99,187 @@
   ::-webkit-scrollbar-thumb:hover{background:linear-gradient(0deg,var(--gold-deep),var(--gold-2))}
 
 
-  /* ============ HERO ============ */
+  /* ============ HERO 100svh — INFO + RIFA + TICKER ============ */
   .hero-section{
     position:relative;
-    min-height:892px;
-    background:
-      radial-gradient(ellipse at 50% 30%, #1a1500 0%, #0d0d0d 55%, #050505 100%);
-    display:flex;flex-direction:column;justify-content:center;align-items:center;
-    overflow:hidden;
+    height:100svh; min-height:600px;
+    display:flex; flex-direction:column; align-items:stretch;
+    justify-content:flex-start;
+    overflow:hidden; padding:0;
+    background:radial-gradient(ellipse at 50% 0%, #1a1500 0%, #0d0d0d 60%, #050505 100%);
+  }
+
+  /* ── Info card: barra de influencer no topo ── */
+  .info-card{
+    position:relative !important;
+    top:auto !important; left:auto !important; bottom:auto !important;
+    transform:none !important;
+    flex-shrink:0; z-index:10;
+    width:100%; min-width:unset; margin:0;
+    border-radius:0; border:none;
+    border-bottom:1px solid rgba(201,168,76,.2);
+    background:rgba(5,3,0,.90);
+    backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+    padding:max(env(safe-area-inset-top,14px),14px) 20px 12px;
+    text-align:center;
+    animation:none !important;
+    box-shadow:none !important;
+  }
+  .info-card.is-floating{ animation:none !important; }
+
+  /* ── IC: badge animado ── */
+  .ic-badge{
+    display:inline-flex; align-items:center; gap:7px;
+    font-family:'Orbitron',sans-serif; font-size:9px;
+    letter-spacing:2.5px; color:rgba(201,168,76,.75);
+    text-transform:uppercase; margin-bottom:6px;
+  }
+  .ic-dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--gold); flex-shrink:0;
+    box-shadow:0 0 8px var(--gold);
+    animation:icDotPulse 1.8s ease-in-out infinite;
+  }
+  @keyframes icDotPulse{
+    0%,100%{opacity:1;box-shadow:0 0 8px var(--gold),0 0 0 0 rgba(201,168,76,.35)}
+    50%{opacity:.4;box-shadow:0 0 3px var(--gold),0 0 0 5px rgba(201,168,76,0)}
+  }
+  .ic-badge strong{ color:var(--gold-2); font-weight:700; }
+
+  /* ── IC: nome com shimmer ── */
+  .ic-name{
+    font-family:'Orbitron',sans-serif;
+    font-size:clamp(18px,5vw,26px); font-weight:400; margin:0 0 3px;
+    background:linear-gradient(90deg,var(--gold-deep) 0%,var(--gold-2) 40%,#fff8c0 55%,var(--gold-2) 70%,var(--gold-deep) 100%);
+    background-size:200% auto;
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation:nameShimmer 4s ease-in-out infinite;
+  }
+  @keyframes nameShimmer{
+    0%{background-position:0% center}
+    50%{background-position:100% center}
+    100%{background-position:0% center}
+  }
+
+  /* ── IC: slogan ── */
+  .ic-slogan{
+    font-family:'Orbitron',sans-serif;
+    font-size:clamp(10px,3.2vw,13px); font-weight:700;
+    color:rgba(255,255,255,.88); letter-spacing:.05em;
+    margin:0 0 8px;
+  }
+
+  /* ── IC: stats row ── */
+  .ic-stats{
+    display:flex; align-items:center; justify-content:center;
+    gap:0; margin-bottom:6px;
+  }
+  .ic-stat{
+    display:flex; flex-direction:column; align-items:center;
+    padding:0 14px;
+  }
+  .ic-stat b{
+    font-family:'Orbitron',sans-serif; font-size:13px; font-weight:700;
+    color:var(--gold); line-height:1;
+  }
+  .ic-stat span{
+    font-family:'Orbitron',sans-serif; font-size:7.5px;
+    letter-spacing:1.5px; color:rgba(255,255,255,.35);
+    text-transform:uppercase; margin-top:2px;
+  }
+  .ic-stat-sep{
+    width:1px; height:28px;
+    background:linear-gradient(180deg,transparent,rgba(201,168,76,.25),transparent);
+  }
+
+  /* ── IC: handle ── */
+  .ic-handle{
+    font-family:'Orbitron',sans-serif; font-size:8.5px;
+    letter-spacing:2.5px; color:rgba(255,255,255,.25); margin:0;
+  }
+
+  /* ── Rifa fold: preenche o espaço restante da hero ── */
+  .rifa-fold{
+    flex:1; min-height:0;
+    display:flex; flex-direction:column;
+    width:100%; max-width:none;
+    padding:10px 16px 0; margin:0; overflow:hidden;
+  }
+  /* rifa-active preserva border-radius e visual original */
+  .rifa-active{
+    flex:1 !important; min-height:0;
+    display:flex; flex-direction:column;
+    /* border-radius e margin mantidos do CSS base */
+  }
+  /* Apenas o rc-hero (imagem) cresce — seções abaixo ficam com altura fixa */
+  .rc-hero{
+    flex:1 !important;
+    min-height:120px;
+    aspect-ratio:unset !important;
+  }
+  .rc-hero-img{
+    width:100%; height:100%; object-fit:cover;
+  }
+
+  /* ── Ticker dentro da hero ── */
+  .hero-section .ticker-section{
+    flex-shrink:0; height:52px; padding:0;
+    border-top:1px solid rgba(201,168,76,.12);
+    border-bottom:none; background:#050505;
+  }
+
+  /* ── Moto card animado ── */
+  .moto-card{
+    position:relative; display:flex; align-items:center; gap:14px;
+    padding:16px 18px; margin-bottom:28px;
+    background:linear-gradient(135deg,#021a0d 0%,#010a05 100%);
+    border:1.5px solid rgba(37,211,102,.3);
+    border-radius:16px; color:#fff;
+    overflow:hidden; cursor:default;
+    animation:motoGlow 2.5s ease-in-out infinite;
+  }
+  @keyframes motoGlow{
+    0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.4),0 8px 28px rgba(0,0,0,.5)}
+    50%{box-shadow:0 0 0 7px rgba(37,211,102,0),0 8px 28px rgba(37,211,102,.18)}
+  }
+  .moto-pulse-wrap{
+    position:absolute;top:50%;left:42px;
+    transform:translate(-50%,-50%);pointer-events:none;
+  }
+  .moto-ring{
+    position:absolute; border-radius:50%;
+    border:1px solid rgba(37,211,102,.45);
+    transform:translate(-50%,-50%);
+    animation:motoRingOut 2s ease-out infinite;
+  }
+  .moto-ring-1{width:56px;height:56px;animation-delay:0s}
+  .moto-ring-2{width:76px;height:76px;animation-delay:.65s}
+  @keyframes motoRingOut{
+    0%{opacity:.7;transform:translate(-50%,-50%) scale(.7)}
+    100%{opacity:0;transform:translate(-50%,-50%) scale(1.5)}
+  }
+  .moto-icon{
+    width:50px;height:50px;border-radius:14px;flex-shrink:0;
+    background:linear-gradient(135deg,#25D366,#128C7E);
+    display:grid;place-items:center;font-size:24px;color:#fff;
+    box-shadow:0 4px 14px rgba(37,211,102,.4);position:relative;z-index:1;
+  }
+  .moto-content{flex:1;min-width:0;position:relative;z-index:1}
+  .moto-eyebrow{
+    font-family:'Orbitron',sans-serif;font-size:7.5px;letter-spacing:2px;
+    color:rgba(37,211,102,.7);text-transform:uppercase;margin-bottom:2px;
+  }
+  .moto-title{
+    font-family:'Orbitron',sans-serif;font-size:clamp(15px,4.5vw,19px);
+    font-weight:900;color:#25D366;line-height:1;margin-bottom:3px;
+    text-shadow:0 0 18px rgba(37,211,102,.45);
+  }
+  .moto-sub{font-size:11px;color:rgba(255,255,255,.45);letter-spacing:.2px}
+  .moto-arrow{
+    flex-shrink:0;width:34px;height:34px;border-radius:50%;
+    border:1px solid rgba(37,211,102,.2);
+    display:grid;place-items:center;
+    color:rgba(37,211,102,.45);font-size:12px;
   }
 
   /* CSS smoke + light beams (substituem os vídeos) */
@@ -870,19 +1042,7 @@
 
   /* ============ MOBILE ============ */
   @media(max-width:767px){
-    /* Hero cresce até preencher o viewport menos a altura fixa do ticker */
-    .hero-section{height:calc(100svh - 52px);min-height:calc(100vw * 1.2);overflow:hidden}
-    /* Ticker fixo em 52px no inferior da dobra — hero + ticker = 100svh */
-    .ticker-section{
-      height:52px;
-      padding:0;
-      display:flex;align-items:center;
-      overflow:hidden;
-    }
-    /* Card na área de terra/chão abaixo dos carros */
     .info-card{
-      top:auto;
-      bottom:14px;
       min-width:92vw;
       padding:14px 20px;
     }
@@ -1079,77 +1239,18 @@
     background: var(--gold); color: #0a0a0a;
   }
 
-  /* ============ HERO VIDEOS — CROSSFADE ============ */
-  .hero-vid-wrap{
-    position:absolute;inset:0;z-index:0;
-    display:none;
-  }
-  .hero-vid-wrap video{
-    position:absolute;
-    top:0;left:50%;
-    transform:translateX(-50%);
-    width:100%;height:auto;
-    min-height:100%;
-    object-fit:contain;
-    object-position:top center;
-    transition:opacity 450ms ease;
-    will-change:opacity;
-  }
-  .hero-vid-a{ opacity:1; }
-  .hero-vid-b{ opacity:0; }
-
-  @media(max-width:767px){
-    .hero-vid-wrap.mobile{ display:block; }
-    /* 9:16 sem zoom: largura 100%, altura proporcional, fixo no topo, centrado */
-    .hero-vid-wrap.mobile video{
-      width:100%;
-      height:auto;
-      min-height:unset;
-      top:0;
-      left:50%;
-      transform:translateX(-50%);
-    }
-    .hero-section{ background:#1a0e00; }
-    .hero-section .fx-smoke{
-      opacity:.80;
-      background:
-        linear-gradient(180deg, transparent 40%, rgba(0,0,0,.82) 100%),
-        radial-gradient(circle at 20% 40%, rgba(201,168,76,.12), transparent 50%);
-    }
-  }
-  @media(min-width:768px){
-    .hero-vid-wrap.desktop{ display:block; }
-    /* 16:9 completo: largura 100%, altura automática = vídeo inteiro visível, topo alinhado */
-    .hero-vid-wrap.desktop video{
-      width:100%;
-      height:auto;
-      min-height:unset;
-      top:0;
-      left:0;
-      transform:none;
-    }
-    /* hero estica para acomodar o vídeo inteiro (proporção 16:9 = 56.25vw de altura) */
-    .hero-section{ background:#1a0e00; min-height:56.26vw; }
-    .hero-section .fx-smoke{
-      opacity:.65;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.12) 0%, transparent 40%, rgba(0,0,0,.55) 100%),
-        radial-gradient(circle at 20% 40%, rgba(201,168,76,.12), transparent 50%);
-    }
-  }
 
 
   /* ============ TABLET (768–1024) ============ */
   @media(min-width:768px) and (max-width:1024px){
-    .info-card{ min-width:clamp(360px,72vw,520px); padding:22px 36px 18px; top:auto; bottom:clamp(32px,5vh,56px); }
+    .info-card{ min-width:clamp(360px,72vw,520px); padding:22px 36px 18px; }
     .links-section{ max-width:700px }
     .card-title{ font-size:clamp(20px,3.5vw,26px) }
   }
 
   /* ============ DESKTOP (≥1025px) ============ */
   @media(min-width:1025px){
-    .info-card{ top:auto; bottom:clamp(48px,6vh,80px); min-width:520px; }
-    .scroll-indicator{ display:block; top:80px; }
+    .info-card{ min-width:520px; }
   }
 
   /* ============ WIDE DESKTOP (≥1440px) ============ */
@@ -1176,71 +1277,29 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero-section">
-  <!-- Crossfade: Mobile (vertical 9:16 — hero-desktop.mp4 = 1080×1920) -->
-  <div class="hero-vid-wrap mobile" aria-hidden="true">
-    <video class="hero-vid-a" autoplay muted playsinline webkit-playsinline preload="auto">
-      <source src="assets/hero-desktop.mp4" type="video/mp4">
-    </video>
-    <video class="hero-vid-b" muted playsinline webkit-playsinline preload="none">
-      <source src="assets/hero-desktop.mp4" type="video/mp4">
-    </video>
-  </div>
-  <!-- Crossfade: Desktop (horizontal 16:9 — hero-mobile.mp4 = 1280×720) -->
-  <div class="hero-vid-wrap desktop" aria-hidden="true">
-    <video class="hero-vid-a" autoplay muted playsinline webkit-playsinline preload="auto">
-      <source src="assets/hero-mobile.mp4" type="video/mp4">
-    </video>
-    <video class="hero-vid-b" muted playsinline webkit-playsinline preload="none">
-      <source src="assets/hero-mobile.mp4" type="video/mp4">
-    </video>
-  </div>
   <div class="fx-layer fx-smoke"></div>
   <div class="fx-layer fx-grain"></div>
 
-  <nav class="nav-labels">
-    <h2>SONHOS</h2>
-    <h2>RIFAS</h2>
-    <h2>REAIS</h2>
-  </nav>
-
-  <div class="scroll-indicator">
-    <div class="scroll-circle">
-      <svg class="scroll-circle-svg" viewBox="0 0 100 100">
-        <defs>
-          <path id="cp" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0"/>
-        </defs>
-        <text font-size="9.5" fill="rgba(201,168,76,.85)" font-family="Orbitron,sans-serif" letter-spacing="3.2">
-          <textPath href="#cp">ARRASTE PARA BAIXO · ARRASTE PARA BAIXO ·</textPath>
-        </text>
-      </svg>
-      <span class="scroll-arrow">&#8595;</span>
-    </div>
-  </div>
-
   <div class="info-card">
-    <div class="badge-verified">
-      <i class="fa-solid fa-circle-check"></i>
-      INFLUENCER VERIFICADO · 129K
+    <div class="ic-badge">
+      <span class="ic-dot"></span>
+      INFLUENCER VERIFICADO · <strong>129K</strong>
     </div>
-    <h2 class="name">Sabino Cabral</h2>
-    <h2 class="title">Vida simples, sonhos grandes 🌾</h2>
-    <p class="handle">@SABINOCABRALBR</p>
-    <p class="scroll-down-hint">Arraste para baixo <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></p>
+    <h1 class="ic-name">Sabino Cabral</h1>
+    <p class="ic-slogan">Vida simples, sonhos grandes 🌾</p>
+    <div class="ic-stats">
+      <div class="ic-stat"><b>129K</b><span>Seguidores</span></div>
+      <div class="ic-stat-sep"></div>
+      <div class="ic-stat"><b>+500</b><span>Sorteios</span></div>
+      <div class="ic-stat-sep"></div>
+      <div class="ic-stat"><b>100%</b><span>Entregues</span></div>
+    </div>
+    <p class="ic-handle">@SABINOCABRALBR</p>
   </div>
-</section>
 
-<!-- ============ TICKER ============ -->
-<div class="ticker-section">
-  <div class="ticker-track" id="ticker">
-    <!-- preenchido por JS para garantir loop perfeito -->
-  </div>
-</div>
-
-<!-- ============ LINKS ============ -->
-<section class="links-section">
-
-  <!-- RIFA ATIVA — Redesign Premium -->
-  <div class="rifa-active gsap-card">
+  <!-- ============ RIFA ATIVA ============ -->
+  <div class="rifa-fold">
+    <div class="rifa-active gsap-card">
 
     <!-- Hero image com overlays editoriais -->
     <div class="rc-hero">
@@ -1307,7 +1366,20 @@
       <span class="cta-arrow-wrap"><i class="fa-solid fa-arrow-right"></i></span>
     </a>
 
+    </div>
+  </div><!-- /rifa-fold -->
+
+  <!-- ============ TICKER ============ -->
+  <div class="ticker-section">
+    <div class="ticker-track" id="ticker">
+      <!-- preenchido por JS para garantir loop perfeito -->
+    </div>
   </div>
+
+</section><!-- /hero-section -->
+
+<!-- ============ LINKS ============ -->
+<section class="links-section">
 
   <!-- Botões IG + WPP (lado a lado) -->
   <div class="banner-row">
@@ -1317,6 +1389,21 @@
     <a href="#" class="banner-link" target="_blank" rel="noopener" aria-label="Participe da nossa Comunidade no WhatsApp">
       <img src="assets/btn-whatsapp.png" alt="Moto gratuita pra quem participa das comunidades" loading="lazy" />
     </a>
+  </div>
+
+  <!-- MOTO GRATUITA — card informativo pulsante -->
+  <div class="moto-card gsap-card" role="note" aria-label="Benefício: Moto gratuita para membros da comunidade">
+    <div class="moto-pulse-wrap" aria-hidden="true">
+      <div class="moto-ring moto-ring-1"></div>
+      <div class="moto-ring moto-ring-2"></div>
+    </div>
+    <div class="moto-icon"><i class="fa-solid fa-motorcycle"></i></div>
+    <div class="moto-content">
+      <div class="moto-eyebrow">Exclusivo · Comunidade</div>
+      <div class="moto-title">MOTO GRATUITA</div>
+      <div class="moto-sub">pra quem participa das comunidades</div>
+    </div>
+    <div class="moto-arrow"><i class="fa-solid fa-gift"></i></div>
   </div>
 
   <!-- GANHADORES — Carrossel de vídeos -->
@@ -1330,6 +1417,24 @@
     </div>
     <div class="carousel-viewport">
       <div class="carousel-track" id="videoTrack">
+
+        <div class="ganh-card">
+          <div class="ganh-img">
+            <img src="assets/ganh-HONDA-BIZ-125.jpg" alt="Ganhador Honda Biz 125" loading="lazy">
+          </div>
+          <div class="ganh-overlay">
+            <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
+          </div>
+        </div>
+
+        <div class="ganh-card">
+          <div class="ganh-img">
+            <img src="assets/ganh-HONDA-FOURTRAX-420.jpg" alt="Ganhador Quadriciclo Honda Fourtrax 420" loading="lazy">
+          </div>
+          <div class="ganh-overlay">
+            <span class="ganh-badge"><i class="fa-solid fa-circle-check"></i> Ganhador</span>
+          </div>
+        </div>
 
         <div class="ganh-card">
           <div class="ganh-img">
@@ -1727,88 +1832,11 @@
     });
   }
 
-  /* ── 5. Crossfade A/B para loop sem tela preta ── */
-  function initVideoCrossfade() {
-    var CROSSFADE_MS  = 450;   // duração do fade em ms
-    var SWITCH_BEFORE = 1200;  // ms antes do fim para iniciar swap
-    var START_AT      = 0.05;  // segundos de offset no início do vídeo inativo
-
-    function setupPair(wrap) {
-      var a = wrap.querySelector('.hero-vid-a');
-      var b = wrap.querySelector('.hero-vid-b');
-      if (!a || !b) return;
-
-      var active   = a;
-      var inactive = b;
-      var swapping = false;
-      var rafId    = null;
-
-      function applyOpacity(el, val) {
-        el.style.transition = 'opacity ' + (CROSSFADE_MS / 1000) + 's ease';
-        el.style.opacity    = String(val);
-      }
-
-      function doSwap() {
-        if (swapping) return;
-        swapping = true;
-
-        inactive.currentTime = START_AT;
-        inactive.play().catch(function () {});
-        applyOpacity(inactive, 1);
-
-        setTimeout(function () {
-          applyOpacity(active, 0);
-          var prev = active;
-          active   = inactive;
-          inactive = prev;
-
-          setTimeout(function () {
-            prev.pause();
-            swapping = false;
-          }, CROSSFADE_MS + 80);
-        }, 60);
-      }
-
-      function tick() {
-        if (!swapping && active.duration > 0) {
-          var msLeft = (active.duration - active.currentTime) * 1000;
-          if (msLeft <= SWITCH_BEFORE) doSwap();
-        }
-        rafId = requestAnimationFrame(tick);
-      }
-
-      function start() {
-        applyOpacity(a, 1);
-        applyOpacity(b, 0);
-        a.play()
-          .then(function () { rafId = requestAnimationFrame(tick); })
-          .catch(function () {
-            /* autoplay bloqueado — tentar no primeiro toque */
-            var resume = function () {
-              a.play().then(function () { rafId = requestAnimationFrame(tick); });
-            };
-            document.addEventListener('touchstart', resume, { once: true });
-            document.addEventListener('click',      resume, { once: true });
-          });
-      }
-
-      start();
-    }
-
-    /* Ativa apenas o wrap visível no viewport atual */
-    var mobile = window.innerWidth < 768;
-    document.querySelectorAll('.hero-vid-wrap').forEach(function (wrap) {
-      if (mobile && wrap.classList.contains('mobile'))  setupPair(wrap);
-      if (!mobile && wrap.classList.contains('desktop')) setupPair(wrap);
-    });
-  }
-
   document.addEventListener('DOMContentLoaded', function () {
     initSmoothScroll();
     heroEntrance();
     initScrollAnimations();
     refreshOnLoad();
-    initVideoCrossfade();
   });
 })();
 </script>
