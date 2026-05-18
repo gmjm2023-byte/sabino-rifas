@@ -7,27 +7,22 @@ on:
 
 jobs:
   deploy:
-    name: SSH Deploy
+    name: SFTP Deploy
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
 
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Deploy via SFTP → Hostinger
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host:     ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_PASS }}
-          port:     ${{ secrets.SSH_PORT }}
-          script: |
-            set -e
-            cd ${{ secrets.DEPLOY_PATH }}
-            git pull origin main
-            npm install --production --prefer-offline
-            # Reinicia o processo Node (PM2 preferido)
-            if command -v pm2 &> /dev/null; then
-              pm2 reload sabino-rifas --update-env || pm2 start server.js --name sabino-rifas
-            fi
-            echo "✅ Deploy concluído em $(date)"
+          server:          ${{ secrets.FTP_HOST }}
+          username:        ${{ secrets.FTP_USER }}
+          password:        ${{ secrets.FTP_PASS }}
+          local-dir:       ./public/
+          server-dir:      ${{ secrets.FTP_PATH }}
+          exclude:         |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
