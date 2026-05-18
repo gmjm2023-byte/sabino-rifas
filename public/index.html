@@ -211,14 +211,19 @@
     display:flex; flex-direction:column;
     /* border-radius e margin mantidos do CSS base */
   }
-  /* Apenas o rc-hero (imagem) cresce — seções abaixo ficam com altura fixa */
+  /* rc-hero mantém 16:9 — vídeo aparece sem recortes */
   .rc-hero{
-    flex:1 !important;
-    min-height:120px;
-    aspect-ratio:unset !important;
+    aspect-ratio:16/9 !important;
+    flex:none !important;
+    min-height:unset !important;
   }
-  .rc-hero-img{
-    width:100%; height:100%; object-fit:cover;
+  .rc-hero-video{
+    width:100%; display:block;
+    object-fit:cover;
+  }
+  /* Centraliza o card verticalmente no espaço disponível */
+  .rifa-fold{
+    justify-content:center;
   }
 
   /* ── Ticker dentro da hero ── */
@@ -1303,7 +1308,9 @@
 
     <!-- Hero image com overlays editoriais -->
     <div class="rc-hero">
-      <img class="rc-hero-img" src="assets/premio-sw4-nivus.jpg" alt="Hilux SW4 + Nivus Highline — Duplo Prêmio" width="800" height="450" loading="eager" fetchpriority="high" />
+      <video class="rc-hero-video" autoplay loop muted playsinline webkit-playsinline preload="auto" poster="assets/premio-sw4-nivus.jpg" aria-label="Hilux SW4 + Nivus Highline — Duplo Prêmio">
+        <source src="assets/rifa-video.mp4" type="video/mp4">
+      </video>
       <div class="rc-hero-top">
         <span class="rc-live-badge">
           <span class="rc-live-dot"></span>Ao Vivo Agora
@@ -1544,6 +1551,20 @@
 </footer>
 
 <script>
+  // ============ RIFA VIDEO — iOS autoplay fix ============
+  (function(){
+    const v = document.querySelector('.rc-hero-video');
+    if(!v) return;
+    // Garante play silencioso no iOS
+    v.muted = true;
+    const tryPlay = () => { v.play().catch(()=>{}); };
+    tryPlay();
+    document.addEventListener('touchstart', tryPlay, { once:true, passive:true });
+    document.addEventListener('visibilitychange', () => {
+      if(document.visibilityState === 'visible') tryPlay();
+    });
+  })();
+
   // ============ TICKER ============
   (function(){
     const words = ['Carros','Motos','Dinheiro','Ganhadores','Sorteios','Rifas','Prêmios','Sonhos'];
