@@ -117,74 +117,38 @@
     gap:10px; z-index:10;
   }
 
-  /* ── Info card: layout horizontal com avatar ── */
+  /* Info card: glass compacto */
   .info-card{
     position:relative;
     flex-shrink:0; z-index:10;
-    background:rgba(5,3,0,.82);
+    background:rgba(5,3,0,.78);
     backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
     border-radius:14px;
-    border:1px solid rgba(201,168,76,.18);
-    padding:10px 14px;
-    display:flex; align-items:center; gap:12px;
+    border:1px solid rgba(201,168,76,.15);
+    padding:12px 20px 10px;
+    text-align:center;
   }
-  /* Avatar circular */
-  .ic-avatar{
-    flex-shrink:0;
-    width:52px; height:52px;
-    border-radius:50%;
-    overflow:hidden;
-    border:2px solid rgba(201,168,76,.55);
-    box-shadow:0 0 0 3px rgba(201,168,76,.10), 0 4px 16px rgba(0,0,0,.5);
-    background:linear-gradient(135deg,#2a1f00,#1a1200);
-    display:grid; place-items:center;
+  .info-card .badge-verified{
+    display:inline-flex;align-items:center;gap:5px;
+    font-family:'Orbitron',sans-serif;font-size:8px;
+    color:rgba(201,168,76,.65);letter-spacing:2px;
+    margin-bottom:4px;
+  }
+  .info-card .badge-verified i{ font-size:9px;color:var(--gold); }
+  .info-card h2.name{
     font-family:'Orbitron',sans-serif;
-    font-size:15px; font-weight:800;
-    color:var(--gold); letter-spacing:0;
-    flex-shrink:0;
+    font-size:clamp(14px,4.2vw,19px);font-weight:400;
+    margin:0 0 1px;color:var(--gold);line-height:1.2;
   }
-  .ic-avatar img{
-    width:100%; height:100%;
-    object-fit:cover; object-position:center top;
-    display:block;
+  .info-card h2.title{
+    color:rgba(255,255,255,.78);font-family:'Poppins',sans-serif;
+    font-size:clamp(11px,2.8vw,13px);font-weight:500;
+    margin:0 0 3px;letter-spacing:0;line-height:1.3;
+    white-space:normal;
   }
-  /* Corpo: nome + handle */
-  .ic-body{
-    flex:1; min-width:0;
-    display:flex; flex-direction:column; gap:3px;
-  }
-  .ic-name-row{
-    display:flex; align-items:center; gap:6px;
-  }
-  .ic-name{
-    font-family:'Orbitron',sans-serif;
-    font-size:clamp(13px,3.8vw,16px); font-weight:700;
-    color:#fff; letter-spacing:-.01em; line-height:1.2;
-    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-  }
-  .ic-check{
-    color:var(--gold); font-size:14px; flex-shrink:0;
-    filter:drop-shadow(0 0 5px rgba(201,168,76,.6));
-  }
-  .ic-handle{
-    font-family:'Poppins',sans-serif;
-    font-size:clamp(10px,2.6vw,11.5px);
-    color:rgba(255,255,255,.42);
-    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-  }
-  .ic-handle strong{
-    color:var(--gold-2); font-weight:600;
-  }
-  .ic-badge{
-    display:inline-flex; align-items:center; gap:4px;
-    font-family:'Orbitron',sans-serif; font-size:8px;
-    letter-spacing:1.5px; text-transform:uppercase;
-    color:rgba(201,168,76,.6);
-    background:rgba(201,168,76,.07);
-    border:1px solid rgba(201,168,76,.18);
-    border-radius:999px; padding:2px 8px;
-    width:fit-content;
-    white-space:nowrap;
+  .info-card .handle{
+    color:rgba(255,255,255,.28);font-family:'Orbitron',sans-serif;
+    font-size:8px;letter-spacing:2px;margin:0;
   }
   .scroll-down-hint{ display:none; }
 
@@ -937,19 +901,13 @@
 
   <!-- Card influencer -->
   <div class="info-card">
-
-    <!-- Avatar: troque o texto "SC" por <img src="assets/sabino-perfil.jpg" alt="Sabino Cabral"> quando tiver a foto -->
-    <div class="ic-avatar">SC</div>
-
-    <div class="ic-body">
-      <div class="ic-name-row">
-        <span class="ic-name">Sabino Cabral</span>
-        <i class="fa-solid fa-circle-check ic-check" aria-hidden="true"></i>
-      </div>
-      <div class="ic-handle">@sabinocabralbr · <strong>129K</strong> seguidores</div>
-      <div class="ic-badge">✦ Influencer Verificado</div>
+    <div class="badge-verified">
+      <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+      INFLUENCER VERIFICADO · 129K
     </div>
-
+    <h2 class="name">Sabino Cabral</h2>
+    <h2 class="title">Vida simples, sonhos grandes</h2>
+    <p class="handle">@SABINOCABRALBR</p>
   </div>
 
   <!-- Card de rifa ativa -->
