@@ -67,13 +67,31 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'" />
 <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" /></noscript>
 
-<!-- Fonts: apenas pesos usados -->
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,700;1,800;1,900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<!-- Fonts: Barlow (corpo) + Barlow Condensed (UI) — Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,600;1,700;1,800;1,900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <style>
+  /* ============ STIGO — Fonte display da identidade Sabino Cabral BR ============ */
+  @font-face {
+    font-family: 'Stigo';
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url('assets/stigo-regular.woff') format('woff'),
+         url('assets/stigo-regular.otf') format('opentype');
+  }
+  @font-face {
+    font-family: 'Stigo';
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+    src: url('assets/stigo-italic.woff') format('woff'),
+         url('assets/stigo-italic.otf') format('opentype');
+  }
   :root{
     --gold:#D95C1A;
     --gold-2:#F07030;
-    --gold-deep:#A33D0F;
+    --gold-deep:#A84010;
+    --font-display:'Stigo','Barlow Condensed',sans-serif;
     --green:#1DB954;
     --green-deep:#0f7a37;
     --ink:#0a0a0a;
@@ -115,6 +133,12 @@
     justify-content:center; align-items:stretch;
     padding:max(env(safe-area-inset-top,12px),12px) 14px 12px;
     gap:10px; z-index:10;
+  }
+
+  /* Logo wordmark no info-card */
+  .info-logo{
+    display:block; width:clamp(160px,50vw,240px); height:auto;
+    margin:0 auto 8px; object-fit:contain;
   }
 
   /* Info card: glass compacto */
@@ -302,7 +326,7 @@
     opacity:.85;margin-bottom:4px;
   }
   .rc-prize-name{
-    font-family:'Barlow Condensed',sans-serif;font-style:italic;
+    font-family:var(--font-display);font-style:italic;
     font-size:clamp(20px,5.5vw,26px);font-weight:800;
     color:#F5F4F0;line-height:1.05;letter-spacing:-.01em;
     text-shadow:0 2px 16px rgba(0,0,0,.7);
@@ -345,7 +369,7 @@
     color:rgba(255,255,255,.35);text-transform:uppercase;
   }
   .rc-price-value{
-    font-family:'Barlow Condensed',sans-serif;font-style:italic;
+    font-family:var(--font-display);font-style:italic;
     font-size:clamp(30px,8.5vw,38px);font-weight:900;
     line-height:1;letter-spacing:-.02em;
     background:linear-gradient(135deg,var(--gold-2) 0%,var(--gold) 60%,var(--gold-deep) 100%);
@@ -430,7 +454,7 @@
     margin-bottom:14px;padding:0 4px;
   }
   .ganhadores-head .head-title{
-    font-family:'Barlow Condensed',sans-serif;font-style:italic;
+    font-family:var(--font-display);font-style:italic;
     font-size:18px;font-weight:700;color:#F5F4F0;
     letter-spacing:2px;margin:0;
     display:flex;align-items:center;gap:10px;
@@ -523,7 +547,7 @@
     margin-bottom:14px;padding:0 4px;
   }
   .faq-head .head-title{
-    font-family:'Barlow Condensed',sans-serif;font-style:italic;
+    font-family:var(--font-display);font-style:italic;
     font-size:18px;font-weight:700;color:#F5F4F0;
     letter-spacing:2px;margin:0;
     display:flex;align-items:center;gap:10px;
@@ -862,7 +886,7 @@
     width: 100%; margin: 0; border-radius: 0;
     padding: 20px 22px;
     position: relative; overflow: hidden;
-    background: linear-gradient(135deg, #F07030 0%, #D95C1A 55%, #A33D0F 100%);
+    background: linear-gradient(135deg, #F07030 0%, #D95C1A 55%, #A84010 100%);
     border: none;
     color: #F5F4F0; text-decoration: none;
     -webkit-tap-highlight-color: transparent;
@@ -910,7 +934,7 @@
     line-height: 1;
   }
   .cta-main {
-    font-family: 'Barlow Condensed', sans-serif; font-style: italic;
+    font-family: var(--font-display); font-style: italic;
     font-size: clamp(13px, 3.2vw, 15px); font-weight: 800;
     letter-spacing: .08em; text-transform: uppercase;
     color: #F5F4F0; line-height: 1.1;
@@ -996,11 +1020,11 @@
 
   <!-- Card influencer -->
   <div class="info-card">
+    <img src="assets/logo-sabino-br.svg" alt="Sabino Cabral BR" class="info-logo" loading="eager" />
     <div class="badge-verified">
       <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
       INFLUENCER VERIFICADO · 129K
     </div>
-    <h2 class="name">Sabino Cabral <span class="brand-br">BR</span></h2>
     <h2 class="title">Vida simples, sonhos grandes</h2>
     <p class="handle">@SABINOCABRALBR</p>
   </div>
