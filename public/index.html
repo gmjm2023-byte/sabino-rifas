@@ -126,13 +126,13 @@
     background:radial-gradient(ellipse at 50% 30%, #160800 0%, #0d0d0d 55%, #050505 100%);
   }
 
-  /* hero-body: empilha do topo, sem padding inferior (ticker encosta flush) */
+  /* hero-body: info-card absorve espaço livre, rifa-active sempre no fundo */
   .hero-body{
     flex:1; min-height:0;
     display:flex; flex-direction:column;
     justify-content:flex-start; align-items:stretch;
     padding:max(env(safe-area-inset-top,8px),8px) 14px 0;
-    gap:10px; z-index:10;
+    gap:0; z-index:10;
   }
 
   /* Logo wordmark no info-card */
@@ -141,16 +141,19 @@
     margin:0 auto 8px; object-fit:contain;
   }
 
-  /* Info card: glass compacto */
+  /* Info card: cresce para absorver o espaço livre acima da rifa */
   .info-card{
     position:relative;
-    flex-shrink:0; z-index:10;
+    flex:1; min-height:80px; z-index:10;
     background:rgba(5,3,0,.78);
     backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
     border-radius:14px;
     border:1px solid rgba(217,92,26,.15);
     padding:12px 20px 10px;
+    margin-bottom:10px;
     text-align:center;
+    display:flex; flex-direction:column;
+    justify-content:center; align-items:center;
   }
   .info-card .badge-verified{
     display:inline-flex;align-items:center;gap:5px;
