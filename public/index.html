@@ -126,12 +126,12 @@
     background:radial-gradient(ellipse at 50% 30%, #160800 0%, #0d0d0d 55%, #050505 100%);
   }
 
-  /* hero-body: info-card absorve espaço livre, rifa-active sempre no fundo */
+  /* hero-body: info-card no topo, rifa-active centralizada no espaço livre */
   .hero-body{
     flex:1; min-height:0;
     display:flex; flex-direction:column;
     justify-content:flex-start; align-items:stretch;
-    padding:max(env(safe-area-inset-top,8px),8px) 14px 0;
+    padding:max(env(safe-area-inset-top,16px),16px) 16px 0;
     gap:0; z-index:10;
   }
 
@@ -176,15 +176,14 @@
   }
   .scroll-down-hint{ display:none; }
 
-  /* Rifa card: tamanho natural, ancorada no fundo (espaço livre fica acima) */
+  /* Rifa card: tamanho natural, CENTRALIZADA no espaço livre (margin auto cima/baixo) */
   .hero-section .rifa-active{
     position:relative; z-index:10;
     flex-shrink:0;
-    margin-top:auto;
+    margin:auto 0;
     border-radius:16px;
     overflow:hidden;
     display:flex; flex-direction:column;
-    margin-bottom:0;
   }
 
   /* Vídeo: 16:9 fixo, sem distorção */
