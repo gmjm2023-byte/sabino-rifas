@@ -141,19 +141,16 @@
     margin:0 auto 8px; object-fit:contain;
   }
 
-  /* Info card: cresce para absorver o espaço livre acima da rifa */
+  /* Info card: altura natural, compacto no topo */
   .info-card{
     position:relative;
-    flex:1; min-height:80px; z-index:10;
+    flex-shrink:0; z-index:10;
     background:rgba(5,3,0,.78);
     backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
     border-radius:14px;
     border:1px solid rgba(217,92,26,.15);
     padding:12px 20px 10px;
-    margin-bottom:10px;
     text-align:center;
-    display:flex; flex-direction:column;
-    justify-content:center; align-items:center;
   }
   .info-card .badge-verified{
     display:inline-flex;align-items:center;gap:5px;
@@ -179,10 +176,11 @@
   }
   .scroll-down-hint{ display:none; }
 
-  /* Rifa card: tamanho natural, sem crescer */
+  /* Rifa card: tamanho natural, ancorada no fundo (espaço livre fica acima) */
   .hero-section .rifa-active{
     position:relative; z-index:10;
     flex-shrink:0;
+    margin-top:auto;
     border-radius:16px;
     overflow:hidden;
     display:flex; flex-direction:column;
