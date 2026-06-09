@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-vibe="lux">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+<!-- SEO -->
+<title>Comunidade Oficial — Sabino Cabral BR | Factor Grátis ao atingir 20 mil membros</title>
+<meta name="description" content="Entre na Comunidade Oficial do Sabino Cabral BR no WhatsApp. Sorteios, conteúdo exclusivo e uma Factor 0KM grátis ao atingir 20 mil membros. 100% gratuito." />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#0a0a0a" />
+<link rel="canonical" href="https://sabinocabral.com/comunidade" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Sabino Cabral BR" />
+<meta property="og:title" content="Comunidade Oficial — Sabino Cabral BR" />
+<meta property="og:description" content="Entre na Comunidade no WhatsApp. Sorteios, conteúdo exclusivo e Factor grátis ao atingir 20 mil membros." />
+<meta property="og:image" content="https://sabinocabral.com/assets/comunidade-factor.webp" />
+<meta property="og:url" content="https://sabinocabral.com/comunidade" />
+<meta property="og:locale" content="pt_BR" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  /* ============ STIGO ============ */
+  @font-face{
+    font-family:'Stigo'; font-weight:400; font-style:normal; font-display:swap;
+    src:url('../assets/stigo-regular.woff') format('woff'),
+        url('../assets/stigo-regular.otf') format('opentype');
+  }
+  @font-face{
+    font-family:'Stigo'; font-weight:400; font-style:italic; font-display:swap;
+    src:url('../assets/stigo-italic.woff') format('woff'),
+        url('../assets/stigo-italic.otf') format('opentype');
+  }
+
+  :root{
+    --o:#D95C1A; --ol:#F07030; --od:#A84010;
+    --wpp:#25D366; --wpp-d:#128C7E;
+    --ink:#0A0A0A; --w:#F5F4F0;
+    --font-display:'Stigo','Barlow Condensed',sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    background:var(--ink); color:var(--w);
+    font-family:'Barlow',system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased; -webkit-text-size-adjust:100%;
+    overflow:hidden;
+  }
+  a{text-decoration:none; -webkit-tap-highlight-color:transparent;}
+
+  /* ============ TELA ÚNICA ============ */
+  .screen{
+    position:relative;
+    min-height:100svh;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    gap:clamp(16px,3vh,26px);
+    padding:max(env(safe-area-inset-top),18px) 20px max(env(safe-area-inset-bottom),22px);
+    max-width:500px; margin:0 auto;
+    text-align:center; overflow:hidden;
+  }
+
+  /* fundo: dark + glow verde (WhatsApp) + glow laranja sutil */
+  .bg-fx{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(ellipse 75% 50% at 50% 6%, rgba(37,211,102,.16), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, rgba(217,92,26,.10), transparent 60%),
+      radial-gradient(ellipse at 50% 40%, #0e1410 0%, #0a0a0a 60%, #050505 100%);
+  }
+  .bg-grain{
+    position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .screen > *{ position:relative; z-index:2; }
+
+  /* ============ LOGO ============ */
+  .logo{
+    width:clamp(160px,46vw,210px); height:auto;
+    filter:drop-shadow(0 2px 14px rgba(0,0,0,.55));
+    animation:fadeUp .55s ease both;
+  }
+
+  /* ============ IMAGEM DESTAQUE (arte Factor) ============ */
+  .hero-img{
+    display:block; width:100%; height:auto;
+    border-radius:16px;
+    border:1px solid rgba(217,92,26,.28);
+    box-shadow:0 20px 50px rgba(0,0,0,.55), 0 6px 18px rgba(37,211,102,.10);
+    animation:fadeUp .6s ease .08s both;
+  }
+
+  /* ============ TEXTO ============ */
+  .copy{ animation:fadeUp .6s ease .14s both; }
+  .headline{
+    font-family:var(--font-display); font-style:italic; font-weight:900;
+    font-size:clamp(26px,8vw,38px); line-height:.96;
+    text-transform:uppercase; letter-spacing:-.01em; color:var(--w);
+  }
+  .headline .accent{ color:var(--wpp); }
+  .subcopy{
+    font-family:'Barlow',sans-serif; font-weight:500;
+    font-size:clamp(13px,3.6vw,15px); line-height:1.4;
+    color:rgba(245,244,240,.62); margin-top:8px;
+  }
+
+  /* ============ CTA WHATSAPP ============ */
+  @keyframes cta-shine{
+    0%{ transform:translateX(-130%) skewX(-20deg); opacity:0; }
+    14%{ opacity:1; } 50%{ transform:translateX(320%) skewX(-20deg); opacity:.7; }
+    52%{ opacity:0; } 100%{ transform:translateX(320%) skewX(-20deg); opacity:0; }
+  }
+  @keyframes cta-glow{
+    0%,100%{ box-shadow:0 6px 26px rgba(37,211,102,.42), 0 2px 8px rgba(0,0,0,.4); }
+    50%{ box-shadow:0 8px 40px rgba(37,211,102,.72), 0 2px 10px rgba(0,0,0,.4); }
+  }
+  .cta{
+    position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center; gap:13px;
+    width:100%; padding:19px 24px; border-radius:16px;
+    background:linear-gradient(135deg, var(--wpp) 0%, #1fbd5a 55%, var(--wpp-d) 100%);
+    color:var(--w);
+    font-family:var(--font-display); font-style:italic; font-weight:900;
+    font-size:clamp(17px,5vw,21px); letter-spacing:.02em; text-transform:uppercase;
+    animation:fadeUp .6s ease .2s both, cta-glow 2.6s ease-in-out infinite .8s;
+    transition:filter .2s ease, transform .12s ease;
+  }
+  .cta::after{
+    content:""; position:absolute; top:-10%; left:0; width:56px; height:120%;
+    background:linear-gradient(108deg, rgba(255,255,255,0) 15%, rgba(255,255,255,.55) 50%, rgba(255,255,255,0) 85%);
+    filter:blur(3px); transform:translateX(-130%) skewX(-20deg);
+    animation:cta-shine 3.4s ease-in-out infinite 1s; pointer-events:none;
+  }
+  .cta:hover{ filter:brightness(1.07); animation-play-state:paused; }
+  .cta:active{ transform:scale(.98); }
+  .cta svg{ width:28px; height:28px; fill:var(--w); flex-shrink:0; position:relative; z-index:1; }
+  .cta span{ position:relative; z-index:1; }
+
+  .reassure{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    font-family:'Barlow Condensed',sans-serif; font-style:italic; font-weight:700;
+    font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+    color:rgba(245,244,240,.4); animation:fadeUp .6s ease .26s both;
+  }
+  .reassure svg{ width:13px; height:13px; fill:rgba(245,244,240,.4); }
+
+  /* ============ NOTIFICAÇÕES FAKE (novos membros) ============ */
+  .notif-stack{
+    position:fixed; top:max(env(safe-area-inset-top),12px); left:50%;
+    transform:translateX(-50%);
+    z-index:50; width:min(340px, calc(100vw - 28px));
+    display:flex; flex-direction:column; gap:8px;
+    pointer-events:none;
+  }
+  .notif{
+    display:flex; align-items:center; gap:11px;
+    padding:10px 13px 10px 10px; border-radius:14px;
+    background:rgba(16,22,18,.92);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    border:1px solid rgba(37,211,102,.28);
+    box-shadow:0 10px 30px rgba(0,0,0,.5);
+    animation:notif-rise 4.4s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  .notif-av{
+    width:36px; height:36px; flex-shrink:0; border-radius:50%;
+    background:linear-gradient(135deg, var(--wpp), var(--wpp-d));
+    display:grid; place-items:center;
+    font-family:'Barlow Condensed',sans-serif; font-style:italic; font-weight:900;
+    font-size:16px; color:var(--w);
+    box-shadow:0 2px 8px rgba(37,211,102,.3);
+  }
+  .notif-body{ display:flex; flex-direction:column; gap:1px; min-width:0; text-align:left; flex:1; }
+  .notif-text{ font-family:'Barlow',sans-serif; font-size:13px; line-height:1.25; color:rgba(245,244,240,.9); }
+  .notif-text strong{ font-weight:700; color:var(--w); }
+  .notif-time{
+    font-family:'Barlow Condensed',sans-serif; font-style:italic; font-weight:700;
+    font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--wpp);
+  }
+  .notif-wpp{ width:20px; height:20px; fill:var(--wpp); flex-shrink:0; opacity:.85; }
+  @keyframes notif-rise{
+    0%{ opacity:0; transform:translateY(20px) scale(.96); }
+    11%{ opacity:1; transform:translateY(0) scale(1); }
+    84%{ opacity:1; transform:translateY(0) scale(1); }
+    100%{ opacity:0; transform:translateY(-14px) scale(.98); }
+  }
+
+  /* ============ ANIMAÇÕES BASE ============ */
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; } }
+
+  /* telas baixas: compacta */
+  @media (max-height:700px){
+    .screen{ gap:13px; justify-content:flex-start; padding-top:max(env(safe-area-inset-top),16px); }
+    .logo{ width:clamp(140px,40vw,180px); }
+  }
+</style>
+</head>
+<body>
+<div class="bg-fx" aria-hidden="true"></div>
+<div class="bg-grain" aria-hidden="true"></div>
+
+<!-- Notificações fake de novos membros -->
+<div class="notif-stack" id="notif-stack" aria-hidden="true"></div>
+
+<main class="screen">
+
+  <!-- Logo -->
+  <img src="../assets/logo-sabino-br.svg" alt="Sabino Cabral BR" class="logo" loading="eager" />
+
+  <!-- Imagem destaque (arte Factor / 20mil membros) -->
+  <img src="../assets/comunidade-factor.webp"
+       alt="Factor 0KM grátis ao atingir 20 mil membros na comunidade"
+       class="hero-img" width="1200" height="800" loading="eager" />
+
+  <!-- Texto -->
+  <div class="copy">
+    <h1 class="headline">Entre na nossa <span class="accent">Comunidade</span></h1>
+    <p class="subcopy">Sorteios, prêmios e conteúdo exclusivo toda semana — e uma <strong>Factor 0KM grátis</strong> ao atingir 20 mil membros.</p>
+  </div>
+
+  <!-- CTA -->
+  <a href="https://osabino.digital/xa16" class="cta" target="_blank" rel="noopener" aria-label="Entrar na comunidade no WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span>Entrar na Comunidade</span>
+  </a>
+
+  <div class="reassure">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6z"/></svg>
+    100% Gratuito · Grupo oficial no WhatsApp
+  </div>
+
+</main>
+
+<script>
+(function(){
+  var stack = document.getElementById('notif-stack');
+  if(!stack) return;
+
+  var names = [
+    "João S.","Maria O.","Carlos M.","Ana P.","Lucas R.","Fernanda L.",
+    "Pedro A.","Juliana C.","Rafael T.","Camila D.","Bruno F.","Patrícia G.",
+    "Marcos V.","Larissa N.","Felipe B.","Beatriz M.","Gustavo H.","Amanda S.",
+    "Rodrigo P.","Letícia F.","Thiago M.","Vanessa R.","Diego S.","Aline C.",
+    "Eduardo L.","Bianca R.","Matheus O.","Sabrina T.","André P.","Núbia M."
+  ];
+  var msgs = ["entrou na comunidade","acabou de entrar","entrou agora mesmo","acabou de entrar"];
+  var wppSvg = '<svg class="notif-wpp" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884z"/></svg>';
+
+  var lastIdx = -1;
+  function pickName(){
+    var i;
+    do { i = Math.floor(Math.random()*names.length); } while(i === lastIdx);
+    lastIdx = i; return names[i];
+  }
+
+  function fire(){
+    if(document.hidden){ schedule(2500); return; }
+    var name = pickName();
+    var msg = msgs[Math.floor(Math.random()*msgs.length)];
+    var el = document.createElement('div');
+    el.className = 'notif';
+    el.innerHTML =
+      '<span class="notif-av">'+ name.charAt(0) +'</span>' +
+      '<span class="notif-body">' +
+        '<span class="notif-text"><strong>'+ name +'</strong> '+ msg +'</span>' +
+        '<span class="notif-time">agora mesmo</span>' +
+      '</span>' + wppSvg;
+    stack.appendChild(el);
+    setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); }, 4400);
+    // disparo alternado: próximo entre 2.2s e 4.2s após este
+    schedule(2200 + Math.random()*2000);
+  }
+  function schedule(ms){ setTimeout(fire, ms); }
+
+  // primeiro disparo após a entrada da tela
+  setTimeout(fire, 1400);
+})();
+</script>
+</body>
+</html>
