@@ -276,13 +276,27 @@
       '</span>' + wppSvg;
     stack.appendChild(el);
     setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); }, 4400);
-    // disparo alternado: próximo entre 2.2s e 4.2s após este
-    schedule(2200 + Math.random()*2000);
+    schedule(nextDelay());
   }
   function schedule(ms){ setTimeout(fire, ms); }
 
-  // primeiro disparo após a entrada da tela
-  setTimeout(fire, 1400);
+  // intervalo irregular/humano: rajadas, normal e pausas longas (pesos diferentes)
+  function nextDelay(){
+    var r = Math.random();
+    if(r < 0.22){
+      // rajada: alguém entra logo em seguida
+      return 700 + Math.random()*900;        // 0,7s – 1,6s
+    } else if(r < 0.78){
+      // ritmo normal
+      return 2400 + Math.random()*2600;       // 2,4s – 5,0s
+    } else {
+      // pausa mais longa (acalma o feed)
+      return 5500 + Math.random()*4000;        // 5,5s – 9,5s
+    }
+  }
+
+  // primeiro disparo após a entrada da tela (também aleatório)
+  setTimeout(fire, 900 + Math.random()*1400);
 })();
 </script>
 </body>
