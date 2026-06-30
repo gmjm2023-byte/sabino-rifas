@@ -310,6 +310,10 @@
       linear-gradient(90deg,rgba(0,0,0,.12) 0%,transparent 40%);
     pointer-events:none;
   }
+  /* arte com texto próprio: só leve escurecimento no topo p/ o badge AO VIVO */
+  .rc-hero--art::after{
+    background:linear-gradient(180deg, rgba(0,0,0,.4) 0%, transparent 24%);
+  }
   .rc-hero-top{
     position:absolute;top:0;left:0;right:0;z-index:3;
     display:flex;align-items:center;justify-content:space-between;
@@ -1045,30 +1049,22 @@
   <!-- Card de rifa ativa -->
   <div class="rifa-active">
 
-    <!-- Hero image com overlays editoriais -->
-    <div class="rc-hero">
-      <video class="rc-hero-img" src="assets/premio-sw4-nivus.mp4"
-        autoplay loop muted playsinline
-        disablePictureInPicture disableRemotePlayback
-        aria-label="Hilux SW4 + Nivus Highline — Duplo Prêmio"></video>
+    <!-- Hero image (arte com texto embutido) -->
+    <div class="rc-hero rc-hero--art">
+      <img class="rc-hero-img" src="assets/capa-card-rifa.webp"
+        alt="Hilux SW4 + Nivus Highline — Duplo Prêmio · Resultado dia 07 JUL"
+        width="1200" height="675" loading="eager" />
       <div class="rc-hero-top">
         <span class="rc-live-badge">
           <span class="rc-live-dot"></span>Ao Vivo Agora
         </span>
-      </div>
-      <div class="rc-hero-bottom">
-        <div class="rc-prize-eyebrow">Duplo Prêmio</div>
-        <div class="rc-prize-name">
-          HILUX SW4
-          <span class="rc-prize-trim">+ NIVUS HIGHLINE (Cota Premiada)</span>
-        </div>
       </div>
     </div>
 
     <!-- Banner promo -->
     <div class="rc-promo-banner">
       <i class="fa-solid fa-fire" aria-hidden="true"></i>
-      PRIMEIROS 20% CONCORREM A <strong>10MIL REAIS!</strong>
+      HILUX E NIVUS NO MENOR TÍTULO · <strong>RESULTADO 07 JUL</strong>
     </div>
 
     <!-- Barra de dados: bônus + preço -->
