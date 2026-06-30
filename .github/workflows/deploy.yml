@@ -22,6 +22,9 @@ jobs:
           password:        ${{ secrets.FTP_PASS }}
           local-dir:       ./public/
           server-dir:      ${{ secrets.FTP_PATH }}
+          # estado novo: força reenvio completo (estado anterior corrompeu e
+          # fazia o deploy pular arquivos. Não deleta nada do servidor).
+          state-name:      .ftp-deploy-state-v2.json
           exclude:         |
             **/.git*
             **/.git*/**
