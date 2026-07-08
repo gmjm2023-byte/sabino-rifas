@@ -314,24 +314,26 @@
   .rc-hero--art::after{
     background:linear-gradient(180deg, rgba(0,0,0,.4) 0%, transparent 24%);
   }
-  /* Tags de prêmio sobre a imagem (canto inferior esquerdo) */
+  /* Tag única de prêmios sobre a imagem (canto inferior esquerdo) */
   .rc-prize-tags{
     position:absolute; left:12px; bottom:12px; z-index:4;
-    display:flex; flex-direction:column; gap:6px;
-  }
-  .rc-prize-tag{
-    align-self:flex-start;
-    display:inline-flex; align-items:baseline; gap:6px;
-    padding:5px 11px; border-radius:8px;
+    display:flex; flex-direction:column; gap:5px;
+    padding:8px 12px; border-radius:10px;
     background:rgba(8,6,4,.82);
     backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
     border:1px solid rgba(217,92,26,.45);
+    box-shadow:0 4px 14px rgba(0,0,0,.45);
+  }
+  .rc-prize-row{
+    display:inline-flex; align-items:baseline; gap:6px;
     font-family:'Barlow Condensed',sans-serif; font-style:italic; font-weight:700;
     font-size:11px; letter-spacing:.06em; text-transform:uppercase;
     color:rgba(245,244,240,.82); line-height:1;
-    box-shadow:0 4px 14px rgba(0,0,0,.45);
   }
-  .rc-prize-tag strong{
+  .rc-prize-row + .rc-prize-row{
+    padding-top:5px; border-top:1px solid rgba(217,92,26,.22);
+  }
+  .rc-prize-row strong{
     font-weight:900; font-size:13px; color:var(--gold-2);
   }
   .rc-hero-top{
@@ -1081,8 +1083,8 @@
         </span>
       </div>
       <div class="rc-prize-tags">
-        <span class="rc-prize-tag"><strong>SW4</strong> Prêmio Principal</span>
-        <span class="rc-prize-tag"><strong>Hilux</strong> Cota Premiada</span>
+        <span class="rc-prize-row"><strong>SW4</strong> Prêmio Principal</span>
+        <span class="rc-prize-row"><strong>Hilux</strong> Cota Premiada</span>
       </div>
     </div>
 
